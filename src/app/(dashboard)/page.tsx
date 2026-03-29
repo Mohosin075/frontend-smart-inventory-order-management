@@ -114,7 +114,7 @@ export default function Dashboard() {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
                     <h1 className="text-4xl font-bold tracking-tight text-slate-900">
-                        Operational <span className="premium-gradient-text italic">Overview</span>
+                        Dashboard <span className="premium-gradient-text italic">Overview</span>
                     </h1>
                     <p className="text-slate-500 mt-2 font-medium">Welcome back, here's what's happening with your inventory today.</p>
                 </div>
@@ -160,8 +160,8 @@ export default function Dashboard() {
             <motion.div variants={item} className="glass-card p-8 rounded-[2.5rem] premium-shadow border-none">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
                     <div>
-                        <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Analytics Engine</h2>
-                        <p className="text-sm text-slate-500 mt-1 font-medium">Visualization of order dynamics and revenue stream.</p>
+                        <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Sales & Orders</h2>
+                        <p className="text-sm text-slate-500 mt-1 font-medium">Visualization of your store's performance.</p>
                     </div>
                     <div className="flex bg-slate-100 p-1 rounded-xl">
                         {['7 Days', '30 Days', '90 Days'].map((range, i) => (
@@ -189,7 +189,7 @@ export default function Dashboard() {
                             <div className="p-2.5 bg-indigo-50 rounded-xl text-indigo-600">
                                 <Package className="w-5 h-5" />
                             </div>
-                            <h2 className="text-xl font-bold text-slate-900 tracking-tight">Inventory Pulse</h2>
+                            <h2 className="text-xl font-bold text-slate-900 tracking-tight">Stock Status</h2>
                         </div>
                         <Button variant="ghost" size="sm" className="text-indigo-600 hover:text-indigo-700 text-[10px] font-black uppercase tracking-[0.2em] px-0 hover:bg-transparent">
                             Full Catalog
@@ -219,7 +219,7 @@ export default function Dashboard() {
                                         ? 'bg-red-50 text-red-600' 
                                         : 'bg-emerald-50 text-emerald-600'
                                     }`}>
-                                        {product.stock <= product.threshold ? 'Strict Low' : 'Stable'}
+                                        {product.stock <= product.threshold ? 'Low Stock' : 'Stable'}
                                     </div>
                                 </motion.div>
                             ))

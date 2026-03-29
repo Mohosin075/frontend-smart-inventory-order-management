@@ -59,35 +59,35 @@ export default function CategoriesPage() {
                         <Trash2 className="w-7 h-7" />
                     </div>
                     <div>
-                        <h4 className="font-black text-slate-900 uppercase tracking-tight text-lg">Destroy Node?</h4>
+                        <h4 className="font-bold text-slate-900 text-lg">Delete Category?</h4>
                         <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] mt-1">{name}</p>
                     </div>
                 </div>
                 <p className="text-xs text-slate-500 font-medium leading-relaxed">
-                    This will permanently remove the classification node. Linked assets will become unassigned.
+                    This will permanently remove this category. Linked products will become unassigned.
                 </p>
                 <div className="flex gap-3">
                     <button 
                         onClick={() => toast.dismiss(t)}
-                        className="flex-1 h-12 rounded-xl text-[10px] font-black uppercase tracking-widest text-slate-400 hover:bg-slate-50 transition-all border border-transparent hover:border-slate-100"
+                        className="flex-1 h-12 rounded-xl text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:bg-slate-50 transition-all border border-transparent hover:border-slate-100"
                     >
-                        Abort
+                        Cancel
                     </button>
                     <button 
                         onClick={async () => {
                             toast.dismiss(t);
                             try {
                                 await deleteCategory(id).unwrap();
-                                toast.success("Classification removed", {
-                                    description: `${name} has been purged from the architecture.`
+                                toast.success("Category deleted", {
+                                    description: `${name} has been removed from the list.`
                                 });
                             } catch (error: any) {
-                                toast.error("System Failure", {
-                                    description: error?.data?.message || "Failed to remove node"
+                                toast.error("Error", {
+                                    description: error?.data?.message || "Failed to delete category"
                                 });
                             }
                         }}
-                        className="flex-1 h-12 rounded-xl bg-red-600 text-white text-[10px] font-black uppercase tracking-widest shadow-lg shadow-red-200 hover:bg-red-700 transition-all"
+                        className="flex-1 h-12 rounded-xl bg-red-600 text-white text-[10px] font-bold uppercase tracking-widest shadow-lg shadow-red-200 hover:bg-red-700 transition-all"
                     >
                         Confirm
                     </button>
@@ -111,18 +111,18 @@ export default function CategoriesPage() {
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
                 <div>
-                    <h1 className="text-4xl font-black tracking-tight text-slate-900">
-                        Classification <span className="premium-gradient-text italic">Architecture</span>
+                    <h1 className="text-4xl font-bold tracking-tight text-slate-900">
+                        Product <span className="premium-gradient-text italic">Categories</span>
                     </h1>
-                    <p className="text-slate-500 mt-2 font-medium tracking-wide">
-                        Organize your ecosystem into high-level logical domains.
+                    <p className="text-slate-500 mt-2 font-medium">
+                        Organize your products into easy-to-manage groups.
                     </p>
                 </div>
                 <Button 
                     onClick={() => setIsModalOpen(true)}
-                    className="h-14 px-8 rounded-[1.25rem] bg-indigo-600 hover:bg-indigo-700 text-white shadow-xl shadow-indigo-600/20 font-black uppercase tracking-[0.2em] text-[11px] gap-3 transition-all duration-300"
+                    className="h-14 px-8 rounded-[1.25rem] bg-indigo-600 hover:bg-indigo-700 text-white shadow-xl shadow-indigo-600/20 font-bold uppercase tracking-wider text-[11px] gap-3 transition-all duration-300"
                 >
-                    <Plus className="w-5 h-5" /> New Structure
+                    <Plus className="w-5 h-5" /> New Category
                 </Button>
             </div>
 
@@ -150,6 +150,7 @@ export default function CategoriesPage() {
                                         <button 
                                             onClick={() => handleEdit(category)}
                                             className="p-3 bg-white shadow-xl rounded-xl text-slate-400 hover:text-indigo-600 hover:scale-110 transition-all"
+                                            title="Edit"
                                         >
                                             <Edit className="w-4 h-4" />
                                         </button>
@@ -157,6 +158,7 @@ export default function CategoriesPage() {
                                             onClick={() => handleDelete(category._id, category.name)}
                                             disabled={isDeleting}
                                             className="p-3 bg-white shadow-xl rounded-xl text-slate-400 hover:text-red-600 hover:scale-110 transition-all"
+                                            title="Delete"
                                         >
                                             {isDeleting ? <Loader2 className="w-4 h-4 animate-spin text-red-600" /> : <Trash2 className="w-4 h-4" />}
                                         </button>
@@ -168,10 +170,10 @@ export default function CategoriesPage() {
                                         <FolderKanban className="w-10 h-10" />
                                     </div>
                                     <div>
-                                        <h3 className="font-black text-slate-900 text-2xl tracking-tight group-hover:text-indigo-600 transition-colors uppercase">{category.name}</h3>
+                                        <h3 className="font-bold text-slate-900 text-2xl tracking-tight group-hover:text-indigo-600 transition-colors uppercase">{category.name}</h3>
                                         <div className="flex items-center gap-2 mt-2 opacity-60">
                                             <Activity className="w-3.5 h-3.5 text-emerald-500" />
-                                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Master Node</span>
+                                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Active Category</span>
                                         </div>
                                     </div>
                                 </div>
@@ -179,9 +181,9 @@ export default function CategoriesPage() {
                                 <div className="space-y-8 relative z-10">
                                     <div className="bg-slate-50/50 p-6 rounded-[2rem] flex items-center justify-between group-hover:bg-white group-hover:shadow-lg transition-all shadow-inner">
                                         <div className="space-y-1">
-                                            <div className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em]">Mapped Assets</div>
-                                            <div className="text-3xl font-black text-slate-900 tracking-tighter group-hover:text-indigo-600 transition-colors">
-                                                {category.productCount || 0} <span className="text-[10px] text-slate-300 font-bold uppercase tracking-widest ml-1">Linked</span>
+                                            <div className="text-[10px] font-bold text-slate-300 uppercase tracking-[0.2em]">Products</div>
+                                            <div className="text-3xl font-bold text-slate-900 tracking-tighter group-hover:text-indigo-600 transition-colors">
+                                                {category.productCount || 0} <span className="text-[10px] text-slate-300 font-bold uppercase tracking-widest ml-1">Items</span>
                                             </div>
                                         </div>
                                         <Button variant="ghost" size="sm" className="h-12 w-12 rounded-2xl bg-white shadow-md border-none p-0 text-indigo-600 hover:bg-indigo-600 hover:text-white transition-all">
@@ -189,12 +191,11 @@ export default function CategoriesPage() {
                                         </Button>
                                     </div>
 
-                                    <div className="flex justify-between items-center text-[10px] font-black text-slate-300 uppercase tracking-[0.3em] px-4">
+                                    <div className="flex justify-between items-center text-[10px] font-bold text-slate-300 uppercase tracking-[0.3em] px-4">
                                         <div className="flex items-center gap-2">
                                             <History className="w-3 h-3" />
-                                            <span>EST. {new Date(category.createdAt).getFullYear()}</span>
+                                            <span>Est. {new Date(category.createdAt).getFullYear()}</span>
                                         </div>
-                                        <span className="text-indigo-400 font-black group-hover:scale-110 transition-transform">SHA-256</span>
                                     </div>
                                 </div>
                                 <div className="absolute -bottom-12 -right-12 w-32 h-32 bg-indigo-500/5 rounded-full blur-3xl group-hover:bg-indigo-500/10 transition-all duration-700" />
@@ -209,14 +210,14 @@ export default function CategoriesPage() {
                             <div className="w-32 h-32 bg-slate-50 rounded-[3rem] flex items-center justify-center mx-auto mb-10 text-slate-200 shadow-inner group transition-all duration-700 hover:bg-indigo-50 hover:text-indigo-200">
                                 <Layers className="w-16 h-16 transform group-hover:rotate-12 transition-transform duration-700" />
                             </div>
-                            <h3 className="text-slate-900 font-black text-3xl tracking-tight italic opacity-30">Void Architecture</h3>
-                            <p className="text-slate-400 text-xs mt-4 uppercase font-bold tracking-[0.4em] max-w-[400px] mx-auto leading-relaxed">No logical domains established in the current cluster protocol repository.</p>
+                            <h3 className="text-slate-900 font-bold text-3xl tracking-tight italic opacity-30">No Categories Found</h3>
+                            <p className="text-slate-400 text-xs mt-4 font-medium max-w-[400px] mx-auto leading-relaxed">You haven&apos;t created any categories yet. Create one to get started.</p>
                             <Button 
                                 onClick={() => setIsModalOpen(true)}
                                 variant="outline"
-                                className="mt-10 h-12 rounded-xl px-8 border-slate-100 uppercase tracking-widest font-black text-[10px] text-slate-400 hover:text-indigo-600 hover:bg-indigo-50"
+                                className="mt-10 h-12 rounded-xl px-8 border-slate-100 uppercase tracking-widest font-bold text-[10px] text-slate-400 hover:text-indigo-600 hover:bg-indigo-50"
                             >
-                                Overwrite Empty Protocol
+                                Create First Category
                             </Button>
                         </motion.div>
                     )}

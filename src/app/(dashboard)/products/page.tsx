@@ -76,32 +76,32 @@ export default function ProductsPage() {
                         <Trash2 className="w-5 h-5" />
                     </div>
                     <div>
-                        <h4 className="font-black text-slate-900 uppercase tracking-tight text-sm">Decommission Asset?</h4>
-                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-0.5">{name}</p>
+                        <h4 className="font-bold text-slate-900 text-sm">Delete Product?</h4>
+                        <p className="text-[10px] text-slate-400 font-medium mt-0.5">{name}</p>
                     </div>
                 </div>
                 <div className="flex gap-2">
                     <button 
                         onClick={() => toast.dismiss(t)}
-                        className="flex-1 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest text-slate-400 hover:bg-slate-50 transition-all"
+                        className="flex-1 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:bg-slate-50 transition-all"
                     >
-                        Abort
+                        Cancel
                     </button>
                     <button 
                         onClick={async () => {
                             toast.dismiss(t);
                             try {
                                 await deleteProduct(id).unwrap();
-                                toast.success("Asset decommissioned", {
-                                    description: `${name} has been removed from active inventory.`
+                                toast.success("Product deleted", {
+                                    description: `${name} has been removed from inventory.`
                                 });
                             } catch (error: any) {
-                                toast.error("Decommissioning failed", {
+                                toast.error("Delete failed", {
                                     description: error?.data?.message || "Internal system error"
                                 });
                             }
                         }}
-                        className="flex-1 py-2 rounded-xl bg-red-600 text-white text-[10px] font-black uppercase tracking-widest shadow-lg shadow-red-200 hover:bg-red-700 transition-all"
+                        className="flex-1 py-2 rounded-xl bg-red-600 text-white text-[10px] font-bold uppercase tracking-widest shadow-lg shadow-red-200 hover:bg-red-700 transition-all"
                     >
                         Confirm
                     </button>
@@ -125,19 +125,19 @@ export default function ProductsPage() {
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
                 <div>
-                    <h1 className="text-4xl font-black tracking-tight text-slate-900">
-                        Asset <span className="premium-gradient-text italic">Repository</span>
+                    <h1 className="text-4xl font-bold tracking-tight text-slate-900">
+                        Product <span className="premium-gradient-text italic">Inventory</span>
                     </h1>
-                    <p className="text-slate-500 mt-2 font-medium tracking-wide">
-                        Global inventory master list and stock synchronization.
+                    <p className="text-slate-500 mt-2 font-medium">
+                        Manage and track all products in your inventory.
                     </p>
                 </div>
                 <div className="flex gap-4">
                     <Button 
                         onClick={() => setIsModalOpen(true)}
-                        className="h-14 px-8 rounded-[1.25rem] bg-indigo-600 hover:bg-indigo-700 text-white shadow-xl shadow-indigo-600/20 font-black uppercase tracking-[0.2em] text-[11px] gap-3 transition-all duration-300"
+                        className="h-14 px-8 rounded-[1.25rem] bg-indigo-600 hover:bg-indigo-700 text-white shadow-xl shadow-indigo-600/20 font-bold uppercase tracking-wider text-[11px] gap-3 transition-all duration-300"
                     >
-                        <Plus className="w-5 h-5" /> Add New Asset
+                        <Plus className="w-5 h-5" /> Add New Product
                     </Button>
                 </div>
             </div>
@@ -148,8 +148,8 @@ export default function ProductsPage() {
                     <Search className={`absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${isFetching ? 'text-indigo-600 animate-pulse' : 'text-slate-300 group-focus-within:text-indigo-600'}`} />
                     <input
                         type="text"
-                        placeholder="Search system assets using nomenclature or serial..."
-                        className="w-full pl-14 pr-12 py-5 bg-white border-none rounded-[1.5rem] text-sm font-bold text-slate-700 placeholder:text-slate-300 shadow-xl shadow-indigo-500/5 focus:ring-2 focus:ring-indigo-500/10 transition-all outline-none"
+                        placeholder="Search products by name or ID..."
+                        className="w-full pl-14 pr-12 py-5 bg-white border-none rounded-[1.5rem] text-sm font-medium text-slate-700 placeholder:text-slate-300 shadow-xl shadow-indigo-500/5 focus:ring-2 focus:ring-indigo-500/10 transition-all outline-none"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -168,27 +168,27 @@ export default function ProductsPage() {
                         <DropdownMenuTrigger asChild>
                             <Button 
                                 variant="outline" 
-                                className={`h-14 px-6 rounded-[1.25rem] border-none bg-white font-black text-[10px] uppercase tracking-widest transition-all gap-3 shadow-xl shadow-indigo-500/5 ${selectedCategory ? 'text-indigo-600 ring-2 ring-indigo-500/10' : 'text-slate-400 hover:text-indigo-600'}`}
+                                className={`h-14 px-6 rounded-[1.25rem] border-none bg-white font-bold text-[10px] uppercase tracking-widest transition-all gap-3 shadow-xl shadow-indigo-500/5 ${selectedCategory ? 'text-indigo-600 ring-2 ring-indigo-500/10' : 'text-slate-400 hover:text-indigo-600'}`}
                             >
                                 <Filter className="w-4 h-4" /> 
-                                {selectedCategory ? categories.find(c => c._id === selectedCategory)?.name : "Filter by Class"}
+                                {selectedCategory ? categories.find((c: any) => c._id === selectedCategory)?.name : "Filter by Category"}
                                 <ChevronDown className="w-3 h-3 ml-2 opacity-50" />
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="w-64 p-2 rounded-2xl border-none shadow-2xl bg-white/95 backdrop-blur-xl">
-                            <DropdownMenuLabel className="text-[9px] font-black uppercase tracking-[0.2em] px-4 py-3 text-slate-400">Inventory Classification</DropdownMenuLabel>
+                            <DropdownMenuLabel className="text-[9px] font-bold uppercase tracking-[0.2em] px-4 py-3 text-slate-400">Categories</DropdownMenuLabel>
                             <DropdownMenuSeparator className="bg-slate-50" />
                             <DropdownMenuItem 
                                 onClick={() => setSelectedCategory(undefined)}
-                                className={`rounded-xl px-4 py-3 text-[10px] uppercase tracking-widest font-black transition-all cursor-pointer ${!selectedCategory ? 'bg-indigo-50 text-indigo-600' : 'text-slate-500 hover:bg-slate-50 hover:text-indigo-600'}`}
+                                className={`rounded-xl px-4 py-3 text-[10px] uppercase tracking-widest font-bold transition-all cursor-pointer ${!selectedCategory ? 'bg-indigo-50 text-indigo-600' : 'text-slate-500 hover:bg-slate-50 hover:text-indigo-600'}`}
                             >
-                                All Assets
+                                All Products
                             </DropdownMenuItem>
                             {categories.map((cat: any) => (
                                 <DropdownMenuItem 
                                     key={cat._id}
                                     onClick={() => setSelectedCategory(cat._id)}
-                                    className={`rounded-xl px-4 py-3 text-[10px] uppercase tracking-widest font-black transition-all cursor-pointer ${selectedCategory === cat._id ? 'bg-indigo-50 text-indigo-600' : 'text-slate-500 hover:bg-slate-50 hover:text-indigo-600'}`}
+                                    className={`rounded-xl px-4 py-3 text-[10px] uppercase tracking-widest font-bold transition-all cursor-pointer ${selectedCategory === cat._id ? 'bg-indigo-50 text-indigo-600' : 'text-slate-500 hover:bg-slate-50 hover:text-indigo-600'}`}
                                 >
                                     {cat.name}
                                 </DropdownMenuItem>
@@ -202,26 +202,26 @@ export default function ProductsPage() {
                                 setSearchTerm("");
                                 setSelectedCategory(undefined);
                             }}
-                            className="h-14 px-6 rounded-[1.25rem] text-[9px] font-black uppercase tracking-widest text-slate-300 hover:text-red-500 hover:bg-red-50 transition-all flex items-center gap-2"
+                            className="h-14 px-6 rounded-[1.25rem] text-[9px] font-bold uppercase tracking-widest text-slate-300 hover:text-red-500 hover:bg-red-50 transition-all flex items-center gap-2"
                         >
-                            Reset System
+                            Reset
                         </button>
                     )}
                 </div>
             </motion.div>
 
-            {/* Premium Table */}
+            {/* Product Table */}
             <motion.div variants={item} className="glass-card rounded-[2.5rem] border-none shadow-xl shadow-indigo-500/5 overflow-hidden">
                 <div className="overflow-x-auto custom-scrollbar">
                     <table className="w-full text-left border-collapse">
                         <thead>
                             <tr className="bg-slate-50/50 border-b border-slate-100">
-                                <th className="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.25em]">Asset Nomenclature</th>
-                                <th className="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.25em] text-center">Classification</th>
-                                <th className="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.25em] text-center">Cost Matrix</th>
-                                <th className="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.25em] text-center">Stock Volume</th>
-                                <th className="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.25em] text-center">Operational Status</th>
-                                <th className="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.25em] text-center">Interface</th>
+                                <th className="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-[0.25em]">Product Name</th>
+                                <th className="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-[0.25em] text-center">Category</th>
+                                <th className="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-[0.25em] text-center">Price</th>
+                                <th className="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-[0.25em] text-center">Stock</th>
+                                <th className="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-[0.25em] text-center">Status</th>
+                                <th className="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-[0.25em] text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-50">
@@ -248,27 +248,27 @@ export default function ProductsPage() {
                                                         <Package className="w-5 h-5" />
                                                     </div>
                                                     <div>
-                                                        <div className="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors uppercase tracking-tight">{product.name}</div>
-                                                        <div className="text-[9px] font-black text-slate-300 uppercase tracking-widest mt-1">UUID: {product._id?.slice(-8)}</div>
+                                                        <div className="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors tracking-tight">{product.name}</div>
+                                                        <div className="text-[9px] font-medium text-slate-400 uppercase tracking-widest mt-1">ID: {product._id?.slice(-8)}</div>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td className="px-8 py-6">
                                                 <div className="flex justify-center">
-                                                    <span className="text-[10px] font-black text-slate-400 border border-slate-100 px-3 py-1 rounded-lg uppercase tracking-widest bg-white shadow-sm transition-all group-hover:border-indigo-200 group-hover:text-indigo-600">
-                                                        {product.category?.name || "Global"}
+                                                    <span className="text-[10px] font-bold text-slate-500 border border-slate-100 px-3 py-1 rounded-lg uppercase tracking-widest bg-white shadow-sm transition-all group-hover:border-indigo-200 group-hover:text-indigo-600">
+                                                        {product.category?.name || "Uncategorized"}
                                                     </span>
                                                 </div>
                                             </td>
                                             <td className="px-8 py-6 text-center">
                                                 <div className="font-mono font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">${product.price.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
                                             </td>
-                                            <td className="px-8 py-6">
+                                            <td className="px-8 py-6 text-center">
                                                 <div className="flex flex-col items-center">
-                                                    <div className={`text-sm font-black transition-all ${product.stockQuantity <= (product.minStockThreshold || 5) ? 'text-red-600 animate-pulse scale-110' : 'text-slate-900'}`}>
-                                                        {product.stockQuantity} <span className="text-[10px] text-slate-300 font-bold uppercase">Units</span>
+                                                    <div className={`text-sm font-bold transition-all ${product.stockQuantity <= (product.minStockThreshold || 5) ? 'text-red-600 animate-pulse' : 'text-slate-900'}`}>
+                                                        {product.stockQuantity} <span className="text-[10px] text-slate-400 font-medium">units</span>
                                                     </div>
-                                                    <div className="w-20 h-1 bg-slate-100 rounded-full mt-2 overflow-hidden shadow-inner">
+                                                    <div className="w-20 h-1 bg-slate-100 rounded-full mt-2 overflow-hidden">
                                                         <div 
                                                             className={`h-full transition-all duration-1000 ${product.stockQuantity <= (product.minStockThreshold || 5) ? 'bg-red-500' : 'bg-emerald-500'}`}
                                                             style={{ width: `${Math.min((product.stockQuantity / 100) * 100, 100)}%` }}
@@ -278,36 +278,34 @@ export default function ProductsPage() {
                                             </td>
                                             <td className="px-8 py-6">
                                                 <div className="flex justify-center">
-                                                    <span className={`px-4 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-[0.2em] shadow-sm transition-all ${
+                                                    <span className={`px-4 py-1.5 rounded-xl text-[9px] font-bold uppercase tracking-wider shadow-sm transition-all ${
                                                         product.stockQuantity > (product.minStockThreshold || 5)
-                                                        ? 'bg-emerald-50 text-emerald-600 border border-emerald-100 group-hover:bg-emerald-500 group-hover:text-white' 
+                                                        ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' 
                                                         : product.stockQuantity > 0 
-                                                        ? 'bg-amber-50 text-amber-600 border border-amber-100 group-hover:bg-amber-500 group-hover:text-white'
-                                                        : 'bg-red-50 text-red-600 border border-red-100 group-hover:bg-red-500 group-hover:text-white'
+                                                        ? 'bg-amber-50 text-amber-600 border border-amber-100'
+                                                        : 'bg-red-50 text-red-600 border border-red-100'
                                                     }`}>
-                                                        {product.stockQuantity > (product.minStockThreshold || 5) ? 'Nominal' : product.stockQuantity > 0 ? 'Critical' : 'Depleted'}
+                                                        {product.stockQuantity > (product.minStockThreshold || 5) ? 'In Stock' : product.stockQuantity > 0 ? 'Low Stock' : 'Out of Stock'}
                                                     </span>
                                                 </div>
                                             </td>
                                             <td className="px-8 py-6">
                                                 <div className="flex items-center justify-center gap-3">
-                                                    <motion.button 
-                                                        whileHover={{ scale: 1.1 }} 
+                                                    <button 
                                                         onClick={() => handleEdit(product)}
-                                                        className="p-3 rounded-xl bg-slate-50 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 hover:shadow-lg transition-all"
-                                                        title="Edit Asset"
+                                                        className="p-3 rounded-xl bg-slate-50 text-slate-400 hover:text-indigo-600 hover:bg-white hover:shadow-lg transition-all"
+                                                        title="Edit"
                                                     >
                                                         <Edit className="w-4 h-4" />
-                                                    </motion.button>
-                                                    <motion.button 
-                                                        whileHover={{ scale: 1.1 }} 
+                                                    </button>
+                                                    <button 
                                                         onClick={() => handleDelete(product._id, product.name)}
                                                         disabled={isDeleting}
-                                                        className="p-3 rounded-xl bg-slate-50 text-slate-400 hover:text-red-600 hover:bg-red-50 hover:shadow-lg transition-all"
-                                                        title="Decommission Asset"
+                                                        className="p-3 rounded-xl bg-slate-50 text-slate-400 hover:text-red-600 hover:bg-white hover:shadow-lg transition-all"
+                                                        title="Delete"
                                                     >
                                                         {isDeleting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
-                                                    </motion.button>
+                                                    </button>
                                                 </div>
                                             </td>
                                         </motion.tr>
@@ -315,13 +313,11 @@ export default function ProductsPage() {
                                 ) : (
                                     <tr>
                                         <td colSpan={6} className="px-8 py-32 text-center">
-                                            <div className="flex flex-col items-center gap-6 opacity-40">
-                                                <div className="w-20 h-20 rounded-full bg-slate-50 flex items-center justify-center text-slate-200">
-                                                    <Package className="w-10 h-10" />
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <p className="font-black uppercase tracking-[0.4em] text-xs text-slate-500">Zero matches found in repository</p>
-                                                    <p className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Adjust search parameters or classification filters</p>
+                                            <div className="flex flex-col items-center gap-4 opacity-40">
+                                                <Package className="w-12 h-12 text-slate-200" />
+                                                <div className="space-y-1">
+                                                    <p className="font-bold text-slate-500">No products found</p>
+                                                    <p className="text-xs text-slate-300">Try adjusting your search or filters</p>
                                                 </div>
                                                 <Button 
                                                     variant="outline" 
@@ -329,9 +325,9 @@ export default function ProductsPage() {
                                                         setSearchTerm("");
                                                         setSelectedCategory(undefined);
                                                     }}
-                                                    className="mt-4 rounded-xl text-[10px] font-black uppercase tracking-widest border-slate-100"
+                                                    className="mt-2 rounded-xl text-[10px] font-bold uppercase tracking-widest"
                                                 >
-                                                    Clear All System Filters
+                                                    Clear All Filters
                                                 </Button>
                                             </div>
                                         </td>

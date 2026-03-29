@@ -78,12 +78,12 @@ export default function OrdersPage() {
     const handleUpdateStatus = async (id: string, status: string) => {
         try {
             await updateStatus({ orderId: id, status }).unwrap();
-            toast.success("Order status synchronized", {
-                description: `Order #${id.slice(-6)} shifted to ${status}.`
+            toast.success("Order status updated", {
+                description: `Order #${id.slice(-6)} is now ${status}.`
             });
         } catch (error: any) {
-            toast.error("Protocol Error", {
-                description: error?.data?.message || "Internal system failure"
+            toast.error("Error", {
+                description: error?.data?.message || "Failed to update status"
             });
         }
     };
@@ -93,21 +93,21 @@ export default function OrdersPage() {
             <div className="bg-white border border-slate-100 p-6 rounded-2xl shadow-2xl flex flex-col gap-4">
                 <div className="flex items-center gap-3 text-rose-600">
                     <XCircle className="w-5 h-5" />
-                    <h4 className="font-black uppercase tracking-tight text-sm">Cancel Transaction?</h4>
+                    <h4 className="font-bold text-sm">Cancel Order?</h4>
                 </div>
                 <div className="flex gap-2">
-                    <button onClick={() => toast.dismiss(t)} className="flex-1 py-2 text-[10px] font-black uppercase text-slate-400">Abort</button>
+                    <button onClick={() => toast.dismiss(t)} className="flex-1 py-2 text-[10px] font-bold uppercase text-slate-400">Close</button>
                     <button 
                         onClick={async () => {
                             toast.dismiss(t);
                             try {
                                 await cancelOrder(id).unwrap();
-                                toast.success("Transaction Voided", { description: "Resources restored to inventory." });
+                                toast.success("Order Cancelled", { description: "Items have been returned to stock." });
                             } catch (error: any) {
-                                toast.error("Cancellation rejected");
+                                toast.error("Cancellation failed");
                             }
                         }}
-                        className="flex-1 py-2 bg-rose-600 text-white rounded-xl text-[10px] font-black uppercase"
+                        className="flex-1 py-2 bg-rose-600 text-white rounded-xl text-[10px] font-bold uppercase"
                     >
                         Confirm
                     </button>
@@ -126,18 +126,18 @@ export default function OrdersPage() {
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
                 <div>
-                    <h1 className="text-4xl font-black tracking-tight text-slate-900">
-                        Transaction <span className="premium-gradient-text italic">Ledger</span>
+                    <h1 className="text-4xl font-bold tracking-tight text-slate-900">
+                        Order <span className="premium-gradient-text italic">History</span>
                     </h1>
-                    <p className="text-slate-500 mt-2 font-medium tracking-wide">
-                        Real-time tracking of outbound logistics and customer fulfillment.
+                    <p className="text-slate-500 mt-2 font-medium">
+                        Track and manage all customer orders and shipments in real-time.
                     </p>
                 </div>
                 <Button 
                     onClick={() => setIsModalOpen(true)}
-                    className="h-14 px-8 rounded-[1.25rem] bg-indigo-600 hover:bg-indigo-700 text-white shadow-xl shadow-indigo-600/20 font-black uppercase tracking-[0.2em] text-[11px] gap-3 transition-all duration-300"
+                    className="h-14 px-8 rounded-[1.25rem] bg-indigo-600 hover:bg-indigo-700 text-white shadow-xl shadow-indigo-600/20 font-bold uppercase tracking-wider text-[11px] gap-3 transition-all duration-300"
                 >
-                    <Plus className="w-5 h-5" /> Initialize Order
+                    <Plus className="w-5 h-5" /> Create New Order
                 </Button>
             </div>
 
@@ -147,8 +147,8 @@ export default function OrdersPage() {
                     <Search className={`absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${isFetching ? 'text-indigo-600 animate-pulse' : 'text-slate-300 group-focus-within:text-indigo-600'}`} />
                     <input
                         type="text"
-                        placeholder="Search by customer name or protocol ID..."
-                        className="w-full pl-14 pr-6 py-5 bg-slate-50 border-none rounded-[1.5rem] text-sm font-bold text-slate-700 placeholder:text-slate-300 focus:ring-2 focus:ring-indigo-500/10 focus:bg-white transition-all outline-none"
+                        placeholder="Search by customer name or order ID..."
+                        className="w-full pl-14 pr-6 py-5 bg-slate-50 border-none rounded-[1.5rem] text-sm font-medium text-slate-700 placeholder:text-slate-300 focus:ring-2 focus:ring-indigo-500/10 focus:bg-white transition-all outline-none"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -156,7 +156,7 @@ export default function OrdersPage() {
                 <div className="flex gap-4">
                     <div className="flex -space-x-3">
                         {[1, 2, 3].map(i => (
-                            <div key={i} className="w-10 h-10 rounded-full border-4 border-white bg-slate-100 flex items-center justify-center text-[10px] font-black text-slate-400">
+                            <div key={i} className="w-10 h-10 rounded-full border-4 border-white bg-slate-100 flex items-center justify-center text-[10px] font-bold text-slate-400">
                                 {i}
                             </div>
                         ))}
@@ -170,12 +170,12 @@ export default function OrdersPage() {
                     <table className="w-full text-left border-collapse">
                         <thead>
                             <tr className="bg-slate-50/50 border-b border-slate-100">
-                                <th className="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.25em]">Transaction ID</th>
-                                <th className="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.25em]">Customer Entity</th>
-                                <th className="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.25em] text-center">Payload Matrix</th>
-                                <th className="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.25em] text-center">Value</th>
-                                <th className="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.25em] text-center">Status</th>
-                                <th className="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.25em] text-center">Interface</th>
+                                <th className="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-[0.25em]">Order ID</th>
+                                <th className="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-[0.25em]">Customer Name</th>
+                                <th className="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-[0.25em] text-center">Products</th>
+                                <th className="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-[0.25em] text-center">Total Value</th>
+                                <th className="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-[0.25em] text-center">Status</th>
+                                <th className="px-8 py-6 text-[10px] font-bold text-slate-400 uppercase tracking-[0.25em] text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-50">
@@ -202,10 +202,10 @@ export default function OrdersPage() {
                                                             <ShoppingBag className="w-4 h-4" />
                                                         </div>
                                                         <div>
-                                                            <div className="text-sm font-black text-slate-900 uppercase tracking-tighter">#{order._id.slice(-8)}</div>
+                                                            <div className="text-sm font-bold text-slate-900 uppercase tracking-tighter">#{order._id.slice(-8)}</div>
                                                             <div className="flex items-center gap-1.5 mt-1">
                                                                 <Calendar className="w-3 h-3 text-slate-300" />
-                                                                <span className="text-[9px] font-black text-slate-300 uppercase tracking-widest">{new Date(order.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</span>
+                                                                <span className="text-[9px] font-medium text-slate-400 uppercase tracking-widest">{new Date(order.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -220,15 +220,15 @@ export default function OrdersPage() {
                                                 </td>
                                                 <td className="px-8 py-6 text-center">
                                                     <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-50 rounded-lg">
-                                                        <span className="text-xs font-black text-slate-900">{order.products.length}</span>
-                                                        <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Units</span>
+                                                        <span className="text-xs font-bold text-slate-900">{order.products.length}</span>
+                                                        <span className="text-[10px] font-medium text-slate-400 uppercase tracking-widest">Items</span>
                                                     </div>
                                                 </td>
                                                 <td className="px-8 py-6 text-center">
-                                                    <div className="text-sm font-black text-slate-900">${order.totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
+                                                    <div className="text-sm font-bold text-slate-900">${order.totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
                                                 </td>
                                                 <td className="px-8 py-6 text-center">
-                                                    <div className={`mx-auto inline-flex items-center gap-2 px-4 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-[0.15em] border shadow-sm ${STATUS_COLORS[order.status] || "bg-gray-100 text-gray-700"}`}>
+                                                    <div className={`mx-auto inline-flex items-center gap-2 px-4 py-1.5 rounded-xl text-[9px] font-bold uppercase tracking-wider border shadow-sm ${STATUS_COLORS[order.status] || "bg-gray-100 text-gray-700"}`}>
                                                         <StatusIcon className="w-3 h-3" />
                                                         {order.status}
                                                     </div>
@@ -236,23 +236,23 @@ export default function OrdersPage() {
                                                 <td className="px-8 py-6 text-center">
                                                     <DropdownMenu>
                                                         <DropdownMenuTrigger asChild>
-                                                            <button className="p-2.5 rounded-xl bg-slate-50 text-slate-400 hover:text-indigo-600 hover:bg-white hover:shadow-lg transition-all">
+                                                            <button className="p-2.5 rounded-xl bg-slate-50 text-slate-400 hover:text-indigo-600 hover:bg-white hover:shadow-lg transition-all" title="Actions">
                                                                 {isUpdating ? <Loader2 className="w-4 h-4 animate-spin" /> : <MoreHorizontal className="w-5 h-5" />}
                                                             </button>
                                                         </DropdownMenuTrigger>
                                                         <DropdownMenuContent align="end" className="w-56 p-2 rounded-2xl border-none shadow-2xl bg-white/95 backdrop-blur-xl">
-                                                            <DropdownMenuItem onClick={() => handleUpdateStatus(order._id, 'Confirmed')} className="rounded-xl px-4 py-3 text-[10px] font-black uppercase tracking-widest text-indigo-600 focus:bg-indigo-50 cursor-pointer flex justify-between">
+                                                            <DropdownMenuItem onClick={() => handleUpdateStatus(order._id, 'Confirmed')} className="rounded-xl px-4 py-3 text-[10px] font-bold uppercase tracking-widest text-indigo-600 focus:bg-indigo-50 cursor-pointer flex justify-between">
                                                                 Confirm Order <ArrowRight className="w-3 h-3" />
                                                             </DropdownMenuItem>
-                                                            <DropdownMenuItem onClick={() => handleUpdateStatus(order._id, 'Shipped')} className="rounded-xl px-4 py-3 text-[10px] font-black uppercase tracking-widest text-purple-600 focus:bg-purple-50 cursor-pointer flex justify-between">
+                                                            <DropdownMenuItem onClick={() => handleUpdateStatus(order._id, 'Shipped')} className="rounded-xl px-4 py-3 text-[10px] font-bold uppercase tracking-widest text-purple-600 focus:bg-purple-50 cursor-pointer flex justify-between">
                                                                 Mark Shipped <ArrowRight className="w-3 h-3" />
                                                             </DropdownMenuItem>
-                                                            <DropdownMenuItem onClick={() => handleUpdateStatus(order._id, 'Delivered')} className="rounded-xl px-4 py-3 text-[10px] font-black uppercase tracking-widest text-emerald-600 focus:bg-emerald-50 cursor-pointer flex justify-between">
+                                                            <DropdownMenuItem onClick={() => handleUpdateStatus(order._id, 'Delivered')} className="rounded-xl px-4 py-3 text-[10px] font-bold uppercase tracking-widest text-emerald-600 focus:bg-emerald-50 cursor-pointer flex justify-between">
                                                                 Mark Delivered <ArrowRight className="w-3 h-3" />
                                                             </DropdownMenuItem>
                                                             <div className="h-px bg-slate-50 my-2" />
-                                                            <DropdownMenuItem onClick={() => handleCancelOrder(order._id)} className="rounded-xl px-4 py-3 text-[10px] font-black uppercase tracking-widest text-rose-600 focus:bg-rose-50 cursor-pointer flex justify-between">
-                                                                Cancel Node <XCircle className="w-3 h-3" />
+                                                            <DropdownMenuItem onClick={() => handleCancelOrder(order._id)} className="rounded-xl px-4 py-3 text-[10px] font-bold uppercase tracking-widest text-rose-600 focus:bg-rose-50 cursor-pointer flex justify-between">
+                                                                Cancel Order <XCircle className="w-3 h-3" />
                                                             </DropdownMenuItem>
                                                         </DropdownMenuContent>
                                                     </DropdownMenu>
@@ -263,11 +263,11 @@ export default function OrdersPage() {
                                 ) : (
                                     <tr>
                                         <td colSpan={6} className="px-8 py-32 text-center">
-                                            <div className="flex flex-col items-center gap-6 opacity-30">
-                                                <ShoppingBag className="w-16 h-16" />
-                                                <div className="space-y-2">
-                                                    <p className="font-black uppercase tracking-[0.4em] text-xs">Zero entries detected</p>
-                                                    <p className="text-[10px] font-bold uppercase tracking-widest">Adjust search protocol or initialize new transition</p>
+                                            <div className="flex flex-col items-center gap-4 opacity-30">
+                                                <ShoppingBag className="w-16 h-16 text-slate-200" />
+                                                <div className="space-y-1">
+                                                    <p className="font-bold text-slate-500">No orders found</p>
+                                                    <p className="text-xs text-slate-300">Try adjusting your search or create a new order</p>
                                                 </div>
                                             </div>
                                         </td>
@@ -286,4 +286,3 @@ export default function OrdersPage() {
         </motion.div>
     );
 }
-

@@ -121,7 +121,7 @@ export function AppSidebar() {
                         className="flex items-center justify-center gap-3 w-full py-3.5 rounded-xl text-[11px] font-black uppercase tracking-[0.2em] transition-all duration-300 bg-white/5 hover:bg-red-500/20 hover:text-red-400 border border-white/5 hover:border-red-500/30 group text-slate-400"
                     >
                         <LogOut className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-                        <span>Sign Out System</span>
+                        <span>Log Out</span>
                     </motion.button>
                 </div>
             </SidebarContent>
