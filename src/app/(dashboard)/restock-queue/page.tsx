@@ -19,7 +19,8 @@ export default function RestockQueuePage() {
     const [restockProduct] = useRestockProductMutation();
     const [searchTerm, setSearchTerm] = useState("");
 
-    const restockItems = productsData?.data?.filter((p: any) => p.stock <= p.threshold) || [];
+    const restockItems = productsData?.data?.filter((p: any) => p.stockQuantity <= p.minStockThreshold) || [];
+
     const filteredItems = restockItems.filter((p: any) => p.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
     const handleRestock = async (id: string, name: string) => {
@@ -71,7 +72,8 @@ export default function RestockQueuePage() {
                     ))
                 ) : filteredItems.length > 0 ? (
                     filteredItems.map((item: any) => {
-                        const priority = item.stock <= 2 ? "High" : item.stock <= 5 ? "Medium" : "Low";
+                        const priority = item.stockQuantity <= 2 ? "High" : item.stockQuantity <= 5 ? "Medium" : "Low";
+
                         const priorityColor = priority === "High" ? "text-red-600 bg-red-50 border-red-100" : priority === "Medium" ? "text-orange-600 bg-orange-50 border-orange-100" : "text-blue-600 bg-blue-50 border-blue-100";
                         
                         return (
@@ -94,7 +96,8 @@ export default function RestockQueuePage() {
                                     <div className="flex items-center gap-4 bg-gray-50/50 p-3 rounded-xl">
                                         <div className="flex-1">
                                             <div className="text-[10px] text-gray-400 font-bold uppercase mb-1">Stock Left</div>
-                                            <div className="text-xl font-bold text-red-600">{item.stock} <span className="text-xs text-gray-400">/ {item.threshold}</span></div>
+                                            <div className="text-xl font-bold text-red-600">{item.stockQuantity} <span className="text-xs text-gray-400">/ {item.minStockThreshold}</span></div>
+
                                         </div>
                                         <div className="w-px h-8 bg-gray-200" />
                                         <div className="flex-1">

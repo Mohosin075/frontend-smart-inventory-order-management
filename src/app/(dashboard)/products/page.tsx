@@ -90,19 +90,21 @@ export default function ProductsPage() {
                                     <tr key={product._id} className="hover:bg-gray-50/50 transition-colors">
                                         <td className="px-6 py-4">
                                             <div className="font-semibold text-gray-900">{product.name}</div>
-                                            {product.stock <= product.threshold && (
+                                            {product.stockQuantity <= product.minStockThreshold && (
                                                 <div className="flex items-center gap-1 mt-1 text-[10px] font-bold text-red-500 uppercase">
                                                     <AlertCircle className="w-3 h-3" /> Low Stock
                                                 </div>
                                             )}
+
                                         </td>
                                         <td className="px-6 py-4 text-sm text-gray-600 text-center">{product.category?.name || "Uncategorized"}</td>
                                         <td className="px-6 py-4 text-sm font-medium text-gray-900 text-center">${product.price.toFixed(2)}</td>
                                         <td className="px-6 py-4 text-center">
-                                            <span className={`text-sm font-bold ${product.stock <= product.threshold ? 'text-red-600' : 'text-gray-700'}`}>
-                                                {product.stock}
+                                            <span className={`text-sm font-bold ${product.stockQuantity <= product.minStockThreshold ? 'text-red-600' : 'text-gray-700'}`}>
+                                                {product.stockQuantity}
                                             </span>
-                                            <span className="text-gray-400 text-xs ml-1">/{product.threshold} min</span>
+                                            <span className="text-gray-400 text-xs ml-1">/{product.minStockThreshold} min</span>
+
                                         </td>
                                         <td className="px-6 py-4 text-center">
                                             <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
@@ -110,7 +112,8 @@ export default function ProductsPage() {
                                                 ? 'bg-green-100 text-green-700' 
                                                 : 'bg-red-100 text-red-700'
                                             }`}>
-                                                {product.status || (product.stock > 0 ? 'Active' : 'Out of Stock')}
+                                                {product.status || (product.stockQuantity > 0 ? 'Active' : 'Out of Stock')}
+
                                             </span>
                                         </td>
                                         <td className="px-6 py-4 text-center">
