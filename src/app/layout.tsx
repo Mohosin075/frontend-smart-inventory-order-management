@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
-import { Lora } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { ReduxProvider } from "@/Provider/ReduxProvider";
 
-const lora = Lora({
+const inter = Inter({
     subsets: ["latin"],
-    weight: ["400", "700"],
-    variable: "--font-cinzel",
+    variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
-    title: "Ascela Dashboard",
-    description: "Ascela Dashboard",
+    title: "Smart Inventory | Dashboard",
+    description: "Professional Inventory & Order Management System",
 };
 
 export default function RootLayout({
@@ -21,9 +20,10 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${lora.className} ${lora.variable} antialiased`}>
+            <body className={`${inter.className} ${inter.variable} antialiased font-sans`}>
                 <ReduxProvider>{children}</ReduxProvider>
             </body>
         </html>
     );
 }
+

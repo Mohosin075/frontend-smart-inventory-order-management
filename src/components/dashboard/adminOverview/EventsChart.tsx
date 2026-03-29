@@ -95,28 +95,36 @@ export function EventsChart() {
     }
 
     return (
-        <Card className="w-full">
-            <CardHeader>
-                <CardTitle>Events Created This Week</CardTitle>
+        <Card className="w-full border-gray-100 shadow-sm rounded-2xl overflow-hidden">
+            <CardHeader className="border-b border-gray-50 bg-gray-50/30">
+                <CardTitle className="text-lg font-bold tracking-tight">Weekly Activity Trends</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="pt-6">
                 <ResponsiveContainer width="100%" height={400}>
                     <BarChart data={chartData} layout="vertical" margin={{ top: 5, right: 30, left: 40, bottom: 5 }}>
-                        <XAxis type="number" stroke="var(--muted-foreground)" axisLine={false} tickLine={false} />
-                        <YAxis dataKey="name" type="category" stroke="var(--muted-foreground)" axisLine={false} tickLine={false} width={40} />
+                        <XAxis type="number" stroke="#94A3B8" axisLine={false} tickLine={false} tick={{ fontSize: 10, fontWeight: 600 }} />
+                        <YAxis dataKey="name" type="category" stroke="#94A3B8" axisLine={false} tickLine={false} width={40} tick={{ fontSize: 10, fontWeight: 700 }} />
                         <Tooltip
                             contentStyle={{
-                                backgroundColor: "var(--card)",
-                                border: "1px solid var(--border)",
-                                borderRadius: "6px",
+                                backgroundColor: "#ffffff",
+                                border: "1px solid #F1F5F9",
+                                borderRadius: "12px",
+                                boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)",
                             }}
-                            labelStyle={{ color: "var(--foreground)" }}
-                            formatter={(value) => [`${value} events`, "Count"]}
+                            labelStyle={{ color: "#0F172A", fontWeight: 700, marginBottom: "4px" }}
+                            itemStyle={{ color: "#4F46E5", fontWeight: 600, fontSize: "12px" }}
+                            formatter={(value) => [`${value} operations`, "Count"]}
                         />
-                        <Bar dataKey="events" fill="#1AA367" radius={[0, 4, 4, 0]} barSize={24} />
+                        <Bar 
+                            dataKey="events" 
+                            fill="#4F46E5" 
+                            radius={[0, 8, 8, 0]} 
+                            barSize={32} 
+                        />
                     </BarChart>
                 </ResponsiveContainer>
             </CardContent>
         </Card>
     );
+
 }

@@ -1,5 +1,7 @@
 "use client";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
+import { Layers } from "lucide-react";
+
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
@@ -28,13 +30,20 @@ export function AppSidebar() {
 
     return (
         <Sidebar className="border-r border-sidebar-border bg-sidebar">
-            <SidebarContent className="bg-secondary p-4 h-full flex flex-col justify-between">
+            <SidebarContent className="bg-sidebar p-4 h-full flex flex-col justify-between shadow-2xl">
+
                 <div>
                     <div className="p-4 pb-8">
-                        <Link href="/" className="block">
-                            <h1 className="font-serif text-xl text-foreground uppercase tracking-widest">ASCELA ADMIN</h1>
-                            <p className="text-xs text-muted-foreground mt-1">Dashboard Control Center</p>
+                        <Link href="/" className="flex items-center gap-3">
+                            <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
+                                <Layers className="w-6 h-6 text-white" />
+                            </div>
+                            <div>
+                                <h1 className="font-bold text-lg text-sidebar-foreground leading-none tracking-tight">SMART</h1>
+                                <p className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.2em] mt-1">Inventory</p>
+                            </div>
                         </Link>
+
                     </div>
                     <SidebarGroup>
                         <SidebarGroupContent>
