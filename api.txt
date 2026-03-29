@@ -1,0 +1,70 @@
+{
+    "statusCode": 200,
+    "success": true,
+    "message": "Analytics overview retrieved successfully",
+    "data": {
+        "totalUsers": {
+            "count": 2,
+            "trend": 0
+        },
+        "activeSubscriptions": {
+            "count": 0,
+            "trend": 0
+        },
+        "recipeCompletions": {
+            "count": 0,
+            "trend": 18.5
+        },
+        "phaseEngagementTrend": [
+            {
+                "label": "Week 1",
+                "menstrual": 30,
+                "follicular": 45,
+                "ovulatory": 60,
+                "luteal": 40
+            },
+            {
+                "label": "Week 2",
+                "menstrual": 35,
+                "follicular": 50,
+                "ovulatory": 75,
+                "luteal": 45
+            },
+            {
+                "label": "Week 3",
+                "menstrual": 25,
+                "follicular": 55,
+                "ovulatory": 85,
+                "luteal": 50
+            },
+            {
+                "label": "Week 4",
+                "menstrual": 40,
+                "follicular": 40,
+                "ovulatory": 70,
+                "luteal": 55
+            }
+        ],
+        "topPhaseRecipes": [
+            {
+                "_id": "69aca0441cc0a0226c65445e",
+                "title": "newwwwwwwww",
+                "phase": "Follicular",
+                "saves": 1
+            },
+            {
+                "_id": "69ab4736bd0fee2601ddd36f",
+                "title": "Avocado Toast with Poached Egg",
+                "phase": "Follicular",
+                "saves": 1
+            }
+        ],
+        "recentActivity": [
+            {
+                "user": "System",
+                "action": "Version 2.4.0 deployed successfully",
+                "timestamp": "2026-03-08T21:22:14.034Z"
+            }
+        ]
+    }
+}
