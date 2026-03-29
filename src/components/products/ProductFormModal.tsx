@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useCreateProductMutation } from "@/redux/features/product/productApi";
 import { toast } from "sonner";
-import { Package, Tag, DollarSign, Database, Activity } from "lucide-react";
+import { Package, Tag, DollarSign, Database, Activity, Plus } from "lucide-react";
 
 const productSchema = z.object({
     name: z.string().min(2, "Name is too short"),
@@ -63,7 +63,7 @@ export default function ProductFormModal({ isOpen, onClose, categories }: Produc
                 <div className="bg-blue-600 p-6 text-white">
                     <DialogHeader>
                         <DialogTitle className="text-xl font-bold flex items-center gap-2">
-                            <PlusIcon className="w-5 h-5" />
+                            <Plus className="w-5 h-5" />
                             Add New Product
                         </DialogTitle>
                         <p className="text-blue-100 text-sm mt-1">Fill in the details to add a new item to your inventory.</p>

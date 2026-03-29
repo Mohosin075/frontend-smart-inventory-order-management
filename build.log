@@ -1,0 +1,1259 @@
+﻿node.exe : 
+[baseline-browser-mapping] The data 
+in this module is over two months 
+old.  To ensure accurate Baseline 
+data, please update: `npm i 
+baseline-browser-mapping@latest -D`
+At C:\nvm4w\nodejs\npx.ps1:29 char:3
++   & $NODE_EXE $NPX_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSp 
+   ecified: ([baseline-brows...pin  
+  g@latest -D`:String) [], Remote   
+ Exception
+    + FullyQualifiedErrorId : Nativ 
+   eCommandError
+ 
+Γû▓ Next.js 16.1.1 (Turbopack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
+[baseline-browser-mapping] The data 
+in this module is over two months 
+old.  To ensure accurate Baseline 
+data, please update: `npm i 
+baseline-browser-mapping@latest -D`
+
+> Build error occurred
+Error: Turbopack build failed with 
+10 errors:
+./src/app/(dashboard)/subscription/p
+age.tsx:17:1
+Export useGetAllSubscriptionsQuery 
+doesn't exist in target module
+[0m [90m 15 |[39m   
+[33mSelectItem[39m[33m,[39m
+ [90m 16 |[39m } [36mfrom[39m [
+32m"@/components/ui/select"[39m[33
+m;[39m
+[31m[1m>[22m[39m[90m 17 |[39m 
+[36mimport[39m { useGetSubscriptio
+nStatsQuery[33m,[39m 
+useGetAllSubscriptionsQuery } 
+[36mfrom[39m [32m"@/redux/feature
+s/dashboard/dashboardApi"[39m[33m;
+[39m
+ [90m    |[39m [31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m
+ [90m 18 |[39m [36mimport[39m { 
+[33mSkeleton[39m } [36mfrom[39m 
+[32m"@/components/ui/skeleton"[39m
+[33m;[39m
+ [90m 19 |[39m [36mimport[39m { 
+useState } [36mfrom[39m 
+[32m"react"[39m[33m;[39m
+ [90m 20 |[39m[0m
+
+The export 
+useGetAllSubscriptionsQuery was not 
+found in module [project]/src/redux/
+features/dashboard/dashboardApi.ts 
+[app-client] (ecmascript).
+Did you mean to import 
+useGetDashboardInsightsQuery?
+All exports of the module are 
+statically known (It doesn't have 
+dynamic exports). So it's known 
+statically that the requested 
+export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(dashboard)/subscripti
+on/page.tsx [Client Component 
+Browser]
+    ./src/app/(dashboard)/subscripti
+on/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(dashboard)/subscripti
+on/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/subscripti
+on/page.tsx [Server Component]
+
+
+./src/app/(dashboard)/subscription/p
+age.tsx:17:1
+Export useGetAllSubscriptionsQuery 
+doesn't exist in target module
+[0m [90m 15 |[39m   
+[33mSelectItem[39m[33m,[39m
+ [90m 16 |[39m } [36mfrom[39m [
+32m"@/components/ui/select"[39m[33
+m;[39m
+[31m[1m>[22m[39m[90m 17 |[39m 
+[36mimport[39m { useGetSubscriptio
+nStatsQuery[33m,[39m 
+useGetAllSubscriptionsQuery } 
+[36mfrom[39m [32m"@/redux/feature
+s/dashboard/dashboardApi"[39m[33m;
+[39m
+ [90m    |[39m [31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m
+ [90m 18 |[39m [36mimport[39m { 
+[33mSkeleton[39m } [36mfrom[39m 
+[32m"@/components/ui/skeleton"[39m
+[33m;[39m
+ [90m 19 |[39m [36mimport[39m { 
+useState } [36mfrom[39m 
+[32m"react"[39m[33m;[39m
+ [90m 20 |[39m[0m
+
+The export 
+useGetAllSubscriptionsQuery was not 
+found in module [project]/src/redux/
+features/dashboard/dashboardApi.ts 
+[app-ssr] (ecmascript).
+Did you mean to import 
+useGetDashboardInsightsQuery?
+All exports of the module are 
+statically known (It doesn't have 
+dynamic exports). So it's known 
+statically that the requested 
+export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(dashboard)/subscripti
+on/page.tsx [Client Component 
+Browser]
+    ./src/app/(dashboard)/subscripti
+on/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(dashboard)/subscripti
+on/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/subscripti
+on/page.tsx [Server Component]
+
+
+./src/app/(dashboard)/analytics/page
+.tsx:6:1
+Export useGetDashboardStatsQuery 
+doesn't exist in target module
+[0m [90m 4 |[39m 
+[36mimport[39m { 
+[33mUsers[39m[33m,[39m 
+[33mEye[39m[33m,[39m 
+[33mHeart[39m[33m,[39m 
+[33mActivity[39m[33m,[39m 
+[33mSpade[39m } [36mfrom[39m 
+[32m"lucide-react"[39m[33m;[39m
+ [90m 5 |[39m [36mimport[39m { 
+[33mBarChart[39m[33m,[39m 
+[33mBar[39m[33m,[39m 
+[33mXAxis[39m[33m,[39m 
+[33mYAxis[39m[33m,[39m 
+[33mTooltip[39m[33m,[39m 
+[33mResponsiveContainer[39m } 
+[36mfrom[39m 
+[32m"recharts"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 6 |[39m 
+[36mimport[39m { 
+useGetDashboardStatsQuery } 
+[36mfrom[39m [32m"@/redux/feature
+s/dashboard/dashboardApi"[39m[33m;
+[39m
+ [90m   |[39m [31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[22m
+[39m
+ [90m 7 |[39m [36mimport[39m { 
+[33mSkeleton[39m } [36mfrom[39m 
+[32m"@/components/ui/skeleton"[39m
+[33m;[39m
+ [90m 8 |[39m
+ [90m 9 |[39m [36mexport[39m 
+[36mdefault[39m 
+[36mfunction[39m 
+[33mAnalyticsPage[39m() {[0m
+
+The export 
+useGetDashboardStatsQuery was not 
+found in module [project]/src/redux/
+features/dashboard/dashboardApi.ts 
+[app-client] (ecmascript).
+Did you mean to import 
+useGetDashboardInsightsQuery?
+All exports of the module are 
+statically known (It doesn't have 
+dynamic exports). So it's known 
+statically that the requested 
+export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(dashboard)/analytics/
+page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/analytics/
+page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(dashboard)/analytics/
+page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/analytics/
+page.tsx [Server Component]
+
+
+./src/app/(dashboard)/analytics/page
+.tsx:6:1
+Export useGetDashboardStatsQuery 
+doesn't exist in target module
+[0m [90m 4 |[39m 
+[36mimport[39m { 
+[33mUsers[39m[33m,[39m 
+[33mEye[39m[33m,[39m 
+[33mHeart[39m[33m,[39m 
+[33mActivity[39m[33m,[39m 
+[33mSpade[39m } [36mfrom[39m 
+[32m"lucide-react"[39m[33m;[39m
+ [90m 5 |[39m [36mimport[39m { 
+[33mBarChart[39m[33m,[39m 
+[33mBar[39m[33m,[39m 
+[33mXAxis[39m[33m,[39m 
+[33mYAxis[39m[33m,[39m 
+[33mTooltip[39m[33m,[39m 
+[33mResponsiveContainer[39m } 
+[36mfrom[39m 
+[32m"recharts"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 6 |[39m 
+[36mimport[39m { 
+useGetDashboardStatsQuery } 
+[36mfrom[39m [32m"@/redux/feature
+s/dashboard/dashboardApi"[39m[33m;
+[39m
+ [90m   |[39m [31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1m^[22m
+[39m
+ [90m 7 |[39m [36mimport[39m { 
+[33mSkeleton[39m } [36mfrom[39m 
+[32m"@/components/ui/skeleton"[39m
+[33m;[39m
+ [90m 8 |[39m
+ [90m 9 |[39m [36mexport[39m 
+[36mdefault[39m 
+[36mfunction[39m 
+[33mAnalyticsPage[39m() {[0m
+
+The export 
+useGetDashboardStatsQuery was not 
+found in module [project]/src/redux/
+features/dashboard/dashboardApi.ts 
+[app-ssr] (ecmascript).
+Did you mean to import 
+useGetDashboardInsightsQuery?
+All exports of the module are 
+statically known (It doesn't have 
+dynamic exports). So it's known 
+statically that the requested 
+export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(dashboard)/analytics/
+page.tsx [Client Component Browser]
+    ./src/app/(dashboard)/analytics/
+page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(dashboard)/analytics/
+page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/analytics/
+page.tsx [Server Component]
+
+
+./src/app/(dashboard)/subscription/e
+dit/page.tsx:11:1
+Export useGetSubscriptionPlansQuery 
+doesn't exist in target module
+[0m [90m  9 |[39m 
+[36mimport[39m { 
+[33mCheck[39m[33m,[39m 
+[33mX[39m[33m,[39m 
+[33mStar[39m[33m,[39m 
+[33mLoader2[39m } [36mfrom[39m 
+[32m"lucide-react"[39m[33m;[39m
+ [90m 10 |[39m [36mimport[39m { 
+useRouter } [36mfrom[39m [32m"nex
+t/navigation"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 11 |[39m 
+[36mimport[39m { useGetSubscriptio
+nPlansQuery[33m,[39m 
+useUpdateSubscriptionPlanMutation } 
+[36mfrom[39m [32m"@/redux/feature
+s/dashboard/dashboardApi"[39m[33m;
+[39m
+ [90m    |[39m [31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m
+ [90m 12 |[39m [36mimport[39m { 
+[33mSkeleton[39m } [36mfrom[39m 
+[32m"@/components/ui/skeleton"[39m
+[33m;[39m
+ [90m 13 |[39m [36mimport[39m { 
+toast } [36mfrom[39m 
+[32m"sonner"[39m[33m;[39m
+ [90m 14 |[39m[0m
+
+The export 
+useGetSubscriptionPlansQuery was 
+not found in module [project]/src/re
+dux/features/dashboard/dashboardApi.
+ts [app-client] (ecmascript).
+Did you mean to import 
+useGetDashboardInsightsQuery?
+All exports of the module are 
+statically known (It doesn't have 
+dynamic exports). So it's known 
+statically that the requested 
+export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(dashboard)/subscripti
+on/edit/page.tsx [Client Component 
+Browser]
+    ./src/app/(dashboard)/subscripti
+on/edit/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(dashboard)/subscripti
+on/edit/page.tsx [Client Component 
+SSR]
+    ./src/app/(dashboard)/subscripti
+on/edit/page.tsx [Server Component]
+
+
+./src/app/(dashboard)/subscription/e
+dit/page.tsx:11:1
+Export useGetSubscriptionPlansQuery 
+doesn't exist in target module
+[0m [90m  9 |[39m 
+[36mimport[39m { 
+[33mCheck[39m[33m,[39m 
+[33mX[39m[33m,[39m 
+[33mStar[39m[33m,[39m 
+[33mLoader2[39m } [36mfrom[39m 
+[32m"lucide-react"[39m[33m;[39m
+ [90m 10 |[39m [36mimport[39m { 
+useRouter } [36mfrom[39m [32m"nex
+t/navigation"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 11 |[39m 
+[36mimport[39m { useGetSubscriptio
+nPlansQuery[33m,[39m 
+useUpdateSubscriptionPlanMutation } 
+[36mfrom[39m [32m"@/redux/feature
+s/dashboard/dashboardApi"[39m[33m;
+[39m
+ [90m    |[39m [31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m
+ [90m 12 |[39m [36mimport[39m { 
+[33mSkeleton[39m } [36mfrom[39m 
+[32m"@/components/ui/skeleton"[39m
+[33m;[39m
+ [90m 13 |[39m [36mimport[39m { 
+toast } [36mfrom[39m 
+[32m"sonner"[39m[33m;[39m
+ [90m 14 |[39m[0m
+
+The export 
+useGetSubscriptionPlansQuery was 
+not found in module [project]/src/re
+dux/features/dashboard/dashboardApi.
+ts [app-ssr] (ecmascript).
+Did you mean to import 
+useGetDashboardInsightsQuery?
+All exports of the module are 
+statically known (It doesn't have 
+dynamic exports). So it's known 
+statically that the requested 
+export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(dashboard)/subscripti
+on/edit/page.tsx [Client Component 
+Browser]
+    ./src/app/(dashboard)/subscripti
+on/edit/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(dashboard)/subscripti
+on/edit/page.tsx [Client Component 
+SSR]
+    ./src/app/(dashboard)/subscripti
+on/edit/page.tsx [Server Component]
+
+
+./src/app/(dashboard)/subscription/p
+age.tsx:17:1
+Export useGetSubscriptionStatsQuery 
+doesn't exist in target module
+[0m [90m 15 |[39m   
+[33mSelectItem[39m[33m,[39m
+ [90m 16 |[39m } [36mfrom[39m [
+32m"@/components/ui/select"[39m[33
+m;[39m
+[31m[1m>[22m[39m[90m 17 |[39m 
+[36mimport[39m { useGetSubscriptio
+nStatsQuery[33m,[39m 
+useGetAllSubscriptionsQuery } 
+[36mfrom[39m [32m"@/redux/feature
+s/dashboard/dashboardApi"[39m[33m;
+[39m
+ [90m    |[39m [31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m
+ [90m 18 |[39m [36mimport[39m { 
+[33mSkeleton[39m } [36mfrom[39m 
+[32m"@/components/ui/skeleton"[39m
+[33m;[39m
+ [90m 19 |[39m [36mimport[39m { 
+useState } [36mfrom[39m 
+[32m"react"[39m[33m;[39m
+ [90m 20 |[39m[0m
+
+The export 
+useGetSubscriptionStatsQuery was 
+not found in module [project]/src/re
+dux/features/dashboard/dashboardApi.
+ts [app-client] (ecmascript).
+Did you mean to import 
+useGetDashboardInsightsQuery?
+All exports of the module are 
+statically known (It doesn't have 
+dynamic exports). So it's known 
+statically that the requested 
+export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(dashboard)/subscripti
+on/page.tsx [Client Component 
+Browser]
+    ./src/app/(dashboard)/subscripti
+on/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(dashboard)/subscripti
+on/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/subscripti
+on/page.tsx [Server Component]
+
+
+./src/app/(dashboard)/subscription/p
+age.tsx:17:1
+Export useGetSubscriptionStatsQuery 
+doesn't exist in target module
+[0m [90m 15 |[39m   
+[33mSelectItem[39m[33m,[39m
+ [90m 16 |[39m } [36mfrom[39m [
+32m"@/components/ui/select"[39m[33
+m;[39m
+[31m[1m>[22m[39m[90m 17 |[39m 
+[36mimport[39m { useGetSubscriptio
+nStatsQuery[33m,[39m 
+useGetAllSubscriptionsQuery } 
+[36mfrom[39m [32m"@/redux/feature
+s/dashboard/dashboardApi"[39m[33m;
+[39m
+ [90m    |[39m [31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m
+ [90m 18 |[39m [36mimport[39m { 
+[33mSkeleton[39m } [36mfrom[39m 
+[32m"@/components/ui/skeleton"[39m
+[33m;[39m
+ [90m 19 |[39m [36mimport[39m { 
+useState } [36mfrom[39m 
+[32m"react"[39m[33m;[39m
+ [90m 20 |[39m[0m
+
+The export 
+useGetSubscriptionStatsQuery was 
+not found in module [project]/src/re
+dux/features/dashboard/dashboardApi.
+ts [app-ssr] (ecmascript).
+Did you mean to import 
+useGetDashboardInsightsQuery?
+All exports of the module are 
+statically known (It doesn't have 
+dynamic exports). So it's known 
+statically that the requested 
+export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(dashboard)/subscripti
+on/page.tsx [Client Component 
+Browser]
+    ./src/app/(dashboard)/subscripti
+on/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(dashboard)/subscripti
+on/page.tsx [Client Component SSR]
+    ./src/app/(dashboard)/subscripti
+on/page.tsx [Server Component]
+
+
+./src/app/(dashboard)/subscription/e
+dit/page.tsx:11:1
+Export 
+useUpdateSubscriptionPlanMutation 
+doesn't exist in target module
+[0m [90m  9 |[39m 
+[36mimport[39m { 
+[33mCheck[39m[33m,[39m 
+[33mX[39m[33m,[39m 
+[33mStar[39m[33m,[39m 
+[33mLoader2[39m } [36mfrom[39m 
+[32m"lucide-react"[39m[33m;[39m
+ [90m 10 |[39m [36mimport[39m { 
+useRouter } [36mfrom[39m [32m"nex
+t/navigation"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 11 |[39m 
+[36mimport[39m { useGetSubscriptio
+nPlansQuery[33m,[39m 
+useUpdateSubscriptionPlanMutation } 
+[36mfrom[39m [32m"@/redux/feature
+s/dashboard/dashboardApi"[39m[33m;
+[39m
+ [90m    |[39m [31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m
+ [90m 12 |[39m [36mimport[39m { 
+[33mSkeleton[39m } [36mfrom[39m 
+[32m"@/components/ui/skeleton"[39m
+[33m;[39m
+ [90m 13 |[39m [36mimport[39m { 
+toast } [36mfrom[39m 
+[32m"sonner"[39m[33m;[39m
+ [90m 14 |[39m[0m
+
+The export 
+useUpdateSubscriptionPlanMutation 
+was not found in module [project]/sr
+c/redux/features/dashboard/dashboard
+Api.ts [app-client] (ecmascript).
+Did you mean to import 
+useGetDashboardInsightsQuery?
+All exports of the module are 
+statically known (It doesn't have 
+dynamic exports). So it's known 
+statically that the requested 
+export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(dashboard)/subscripti
+on/edit/page.tsx [Client Component 
+Browser]
+    ./src/app/(dashboard)/subscripti
+on/edit/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(dashboard)/subscripti
+on/edit/page.tsx [Client Component 
+SSR]
+    ./src/app/(dashboard)/subscripti
+on/edit/page.tsx [Server Component]
+
+
+./src/app/(dashboard)/subscription/e
+dit/page.tsx:11:1
+Export 
+useUpdateSubscriptionPlanMutation 
+doesn't exist in target module
+[0m [90m  9 |[39m 
+[36mimport[39m { 
+[33mCheck[39m[33m,[39m 
+[33mX[39m[33m,[39m 
+[33mStar[39m[33m,[39m 
+[33mLoader2[39m } [36mfrom[39m 
+[32m"lucide-react"[39m[33m;[39m
+ [90m 10 |[39m [36mimport[39m { 
+useRouter } [36mfrom[39m [32m"nex
+t/navigation"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 11 |[39m 
+[36mimport[39m { useGetSubscriptio
+nPlansQuery[33m,[39m 
+useUpdateSubscriptionPlanMutation } 
+[36mfrom[39m [32m"@/redux/feature
+s/dashboard/dashboardApi"[39m[33m;
+[39m
+ [90m    |[39m [31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m[31m[1m^[22m[39m[31m[
+1m^[22m[39m[31m[1m^[22m[39m[3
+1m[1m^[22m[39m[31m[1m^[22m[39
+m[31m[1m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31m[1m^
+[22m[39m
+ [90m 12 |[39m [36mimport[39m { 
+[33mSkeleton[39m } [36mfrom[39m 
+[32m"@/components/ui/skeleton"[39m
+[33m;[39m
+ [90m 13 |[39m [36mimport[39m { 
+toast } [36mfrom[39m 
+[32m"sonner"[39m[33m;[39m
+ [90m 14 |[39m[0m
+
+The export 
+useUpdateSubscriptionPlanMutation 
+was not found in module [project]/sr
+c/redux/features/dashboard/dashboard
+Api.ts [app-ssr] (ecmascript).
+Did you mean to import 
+useGetDashboardInsightsQuery?
+All exports of the module are 
+statically known (It doesn't have 
+dynamic exports). So it's known 
+statically that the requested 
+export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./src/app/(dashboard)/subscripti
+on/edit/page.tsx [Client Component 
+Browser]
+    ./src/app/(dashboard)/subscripti
+on/edit/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/(dashboard)/subscripti
+on/edit/page.tsx [Client Component 
+SSR]
+    ./src/app/(dashboard)/subscripti
+on/edit/page.tsx [Server Component]
+
+
+    at <unknown> (./src/app/(dashboa
+rd)/subscription/page.tsx:17:1)
+    at <unknown> (./src/app/(dashboa
+rd)/subscription/page.tsx:17:1)
+    at <unknown> (./src/app/(dashboa
+rd)/analytics/page.tsx:6:1)
+    at <unknown> (./src/app/(dashboa
+rd)/analytics/page.tsx:6:1)
+    at <unknown> (./src/app/(dashboa
+rd)/subscription/edit/page.tsx:11:1)
+    at <unknown> (./src/app/(dashboa
+rd)/subscription/edit/page.tsx:11:1)
+    at <unknown> (./src/app/(dashboa
+rd)/subscription/page.tsx:17:1)
+    at <unknown> (./src/app/(dashboa
+rd)/subscription/page.tsx:17:1)
+    at <unknown> (./src/app/(dashboa
+rd)/subscription/edit/page.tsx:11:1)
+    at <unknown> (./src/app/(dashboa
+rd)/subscription/edit/page.tsx:11:1)
