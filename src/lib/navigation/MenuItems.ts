@@ -1,37 +1,54 @@
-"use client";
-import { LayoutDashboard, Users, CreditCard, TrendingUp, UtensilsCrossed } from "lucide-react";
+import { 
+    LayoutDashboard, 
+    Box, 
+    Layers, 
+    ShoppingCart, 
+    ClipboardList, 
+    History 
+} from "lucide-react";
 
 export interface MenuItem {
     title: string;
     url: string;
-    icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+    icon: React.ComponentType<any>;
 }
 
-const commonMenuItems: MenuItem[] = [
+const inventoryMenuItems: MenuItem[] = [
     {
         title: "Dashboard",
         url: "/",
         icon: LayoutDashboard,
     },
     {
-        title: "User Management",
-        url: "/users-management",
-        icon: Users,
+        title: "Products",
+        url: "/products",
+        icon: Box,
     },
     {
-        title: "Subscription",
-        url: "/subscription",
-        icon: CreditCard,
+        title: "Categories",
+        url: "/categories",
+        icon: Layers,
     },
     {
-        title: "Analytics",
-        url: "/analytics",
-        icon: TrendingUp,
+        title: "Orders",
+        url: "/orders",
+        icon: ShoppingCart,
+    },
+    {
+        title: "Restock Queue",
+        url: "/restock-queue",
+        icon: ClipboardList,
+    },
+    {
+        title: "Activity Logs",
+        url: "/activity-logs",
+        icon: History,
     },
 ];
 
 export const menuItems: Record<string, MenuItem[]> = {
-    admin: commonMenuItems,
-    super_admin: commonMenuItems,
-    organizer: commonMenuItems, 
+    admin: inventoryMenuItems,
+    super_admin: inventoryMenuItems,
+    manager: inventoryMenuItems,
+    user: inventoryMenuItems,
 };

@@ -6,7 +6,6 @@ const baseURL = (process.env.NEXT_PUBLIC_BASEURL as string) || "http://localhost
 
 const baseQuery = fetchBaseQuery({
     baseUrl: `${baseURL}/api/v1`,
-    credentials: "include",
     prepareHeaders: (headers, { getState }) => {
         const state = getState() as RootState;
         const token = state.auth.accessToken;
@@ -19,10 +18,9 @@ const baseQuery = fetchBaseQuery({
 
 const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (args, api, extraOptions) => {
     let result = await baseQuery(args, api, extraOptions);
-    console.log(result);
 
     if (result.error?.status === 401) {
-        const refreshResult = await baseQuery("/auth/access-token", api, extraOptions);
+        const refreshResult = await baseQuery({ url: "/auth/refresh-token", method: "POST" }, api, extraOptions);
 
         if (refreshResult.data) {
             const data = refreshResult.data as any;
@@ -43,6 +41,6 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 export const baseApi = createApi({
     reducerPath: "api",
     baseQuery: baseQueryWithReauth,
-    tagTypes: ["Auth", "User", "Contact", "Dashboard", "Event", "Support", "UserProfile", "MyEvent", "Promotion", "PromotionStats", "OrganizerDashboard", "AdminStats", "EventAnalytics", "Notifications", "Livestream", "ChatMessages", "ChatParticipants", "Chat", "Message", "Recipe"],
+    tagTypes: ["Auth", "User", "Dashboard", "Product", "Category", "Order", "Activity", "Restock"],
     endpoints: () => ({}),
 });
