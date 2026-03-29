@@ -71,6 +71,33 @@ export default function Login_Form() {
         }
     };
 
+    const handleDemoLogin = async () => {
+        setIsLoading(true);
+        const toastId = toast.loading("Logging in with demo credentials...");
+        try {
+            const demoCreds = { email: "web.mohosin@gmail.com", password: "12345678", rememberMe: false };
+            const response = await login(demoCreds).unwrap();
+            if (response.success && response.data) {
+                dispatch(
+                    setCredentials({
+                        accessToken: response.data.accessToken,
+                        role: response.data.role,
+                    })
+                );
+                toast.success("Demo login successful!");
+                router.push("/");
+            } else {
+                toast.error(response.message || "Demo login failed");
+            }
+        } catch (error: any) {
+            console.error("Demo login failed:", error);
+            toast.error(error?.data?.message || "Demo login failed");
+        } finally {
+            setIsLoading(false);
+            toast.dismiss(toastId);
+        }
+    };
+
     return (
         <div className="bg-white p-8 md:p-10 rounded-[24px] shadow-sm w-full max-w-[480px]">
             <form onSubmit={handleSubmit(handleLogin)} className="w-full">
@@ -148,6 +175,14 @@ export default function Login_Form() {
                     className="w-full bg-[#F48FB1] hover:bg-[#F06292] text-white font-medium text-lg py-3 px-4 rounded-[12px] transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed shadow-md shadow-[#F48FB1]/20"
                 >
                     {isLoading ? "Signing In..." : "Sign In"}
+                </button>
+                <button
+                    type="button"
+                    onClick={handleDemoLogin}
+                    disabled={isLoading}
+                    className="w-full mt-3 border border-[#F48FB1] text-[#F48FB1] font-medium text-lg py-3 px-4 rounded-[12px] transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
+                >
+                    {isLoading ? "Working..." : "Demo Login"}
                 </button>
             </form>
         </div>

@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery, BaseQueryFn, FetchArgs, FetchBaseQueryError 
 import { RootState } from "../store";
 import { logout, setToken } from "../features/auth/authSlice";
 
-const baseURL = process.env.NEXT_PUBLIC_BASEURL as string;
+const baseURL = (process.env.NEXT_PUBLIC_BASEURL as string) || "http://localhost:5000";
 
 const baseQuery = fetchBaseQuery({
     baseUrl: `${baseURL}/api/v1`,
