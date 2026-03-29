@@ -122,9 +122,9 @@ export default function Dashboard() {
                     <Button variant="outline" className="h-12 px-6 rounded-xl border-slate-200 hover:bg-slate-50 font-bold uppercase tracking-wider text-[10px] transition-all duration-300">
                         Export Report
                     </Button>
-                    <Button className="h-12 px-6 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white shadow-xl shadow-indigo-600/20 font-bold uppercase tracking-wider text-[10px] gap-2 transition-all duration-300">
+                    {/* <Button className="h-12 px-6 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white shadow-xl shadow-indigo-600/20 font-bold uppercase tracking-wider text-[10px] gap-2 transition-all duration-300">
                         <Plus className="w-4 h-4" /> Create New Order
-                    </Button>
+                    </Button> */}
                 </div>
             </div>
 
