@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -11,16 +12,19 @@ import {
     DialogFooter 
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { useCreateProductMutation } from "@/redux/features/product/productApi";
+import { 
+    useCreateProductMutation, 
+    useUpdateProductMutation 
+} from "@/redux/features/product/productApi";
 import { toast } from "sonner";
-import { Package, Tag, DollarSign, Database, Activity, Plus } from "lucide-react";
+import { Package, Tag, DollarSign, Database, Activity, Plus, Edit3 } from "lucide-react";
 
 const productSchema = z.object({
     name: z.string().min(2, "Name is too short"),
     categoryId: z.string().min(1, "Please select a category"),
     price: z.coerce.number().positive("Price must be positive"),
-    stock: z.coerce.number().int().nonnegative("Stock cannot be negative"),
-    threshold: z.coerce.number().int().nonnegative("Threshold cannot be negative"),
+    stockQuantity: z.coerce.number().int().nonnegative("Stock cannot be negative"),
+    minStockThreshold: z.coerce.number().int().nonnegative("Threshold cannot be negative"),
 });
 
 type ProductFormData = z.infer<typeof productSchema>;
@@ -29,10 +33,16 @@ interface ProductFormModalProps {
     isOpen: boolean;
     onClose: () => void;
     categories: any[];
+    initialData?: any; // To support edit mode
 }
 
-export default function ProductFormModal({ isOpen, onClose, categories }: ProductFormModalProps) {
-    const [createProduct, { isLoading }] = useCreateProductMutation();
+export default function ProductFormModal({ isOpen, onClose, categories, initialData }: ProductFormModalProps) {
+    const [createProduct, { isLoading: isCreating }] = useCreateProductMutation();
+    const [updateProduct, { isLoading: isUpdating }] = useUpdateProductMutation();
+    
+    const isEditMode = !!initialData;
+    const isLoading = isCreating || isUpdating;
+
     const {
         register,
         handleSubmit,
@@ -41,156 +51,179 @@ export default function ProductFormModal({ isOpen, onClose, categories }: Produc
     } = useForm<ProductFormData>({
         resolver: zodResolver(productSchema),
         defaultValues: {
-            stock: 0,
-            threshold: 5
+            stockQuantity: 0,
+            minStockThreshold: 5
         }
     });
 
+    // Reset form when initialData changes or modal opens/closes
+    useEffect(() => {
+        if (isOpen) {
+            if (initialData) {
+                reset({
+                    name: initialData.name,
+                    categoryId: initialData.category?._id || initialData.category,
+                    price: initialData.price,
+                    stockQuantity: initialData.stockQuantity,
+                    minStockThreshold: initialData.minStockThreshold,
+                });
+            } else {
+                reset({
+                    name: "",
+                    categoryId: "",
+                    price: 0,
+                    stockQuantity: 0,
+                    minStockThreshold: 5
+                });
+            }
+        }
+    }, [initialData, isOpen, reset]);
+
     const onSubmit = async (data: ProductFormData) => {
         try {
-            await createProduct(data).unwrap();
-            toast.success("Product created successfully!");
-            reset();
+            if (isEditMode) {
+                await updateProduct({ id: initialData._id, ...data }).unwrap();
+                toast.success("Asset updated successfully!", {
+                    description: `${data.name} has been modified in the repository.`
+                });
+            } else {
+                await createProduct(data).unwrap();
+                toast.success("New asset registered!", {
+                    description: `${data.name} has been added to the repository.`
+                });
+            }
             onClose();
         } catch (error: any) {
-            toast.error(error?.data?.message || "Failed to create product");
+            toast.error(error?.data?.message || `Failed to ${isEditMode ? 'update' : 'create'} asset`);
         }
     };
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogContent className="sm:max-w-[480px] p-0 overflow-hidden rounded-2xl border-none shadow-2xl">
-                <div className="bg-blue-600 p-6 text-white">
+            <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden rounded-[2rem] border-none shadow-2xl bg-white/95 backdrop-blur-xl">
+                <div className={`p-8 text-white ${isEditMode ? 'bg-indigo-600' : 'bg-slate-900'}`}>
                     <DialogHeader>
-                        <DialogTitle className="text-xl font-bold flex items-center gap-2">
-                            <Plus className="w-5 h-5" />
-                            Add New Product
+                        <DialogTitle className="text-2xl font-black flex items-center gap-3 uppercase tracking-wider">
+                            {isEditMode ? <Edit3 className="w-6 h-6" /> : <Plus className="w-6 h-6" />}
+                            {isEditMode ? "Modify Asset" : "Register Asset"}
                         </DialogTitle>
-                        <p className="text-blue-100 text-sm mt-1">Fill in the details to add a new item to your inventory.</p>
+                        <p className="text-white/60 text-[11px] font-bold uppercase tracking-[0.2em] mt-2 leading-relaxed">
+                            {isEditMode 
+                                ? `Updating technical specifications for ${initialData.name}` 
+                                : "Initialize new inventory item for global synchronization"}
+                        </p>
                     </DialogHeader>
                 </div>
                 
-                <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-6 bg-white">
-                    <div className="space-y-4">
+                <form onSubmit={handleSubmit(onSubmit)} className="p-8 space-y-8">
+                    <div className="space-y-6">
                         {/* Name */}
-                        <div className="space-y-1.5">
-                            <label className="text-sm font-bold text-gray-700 flex items-center gap-2">
-                                <Package className="w-4 h-4 text-blue-500" />
-                                Product Name
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2 px-1">
+                                <Package className="w-3 h-3 text-indigo-500" />
+                                Asset Nomenclature
                             </label>
                             <input
                                 {...register("name")}
-                                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all outline-none text-sm placeholder:text-gray-400"
-                                placeholder="e.g. iPhone 13 Pro"
+                                className="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all outline-none text-sm font-bold text-slate-700 placeholder:text-slate-300 shadow-inner"
+                                placeholder="e.g. CORE-RTX-4090-INDUSTRIAL"
                             />
-                            {errors.name && <p className="text-xs text-red-500 font-medium">{errors.name.message}</p>}
+                            {errors.name && <p className="text-[10px] text-red-500 font-black uppercase tracking-tighter px-1 mt-1">{errors.name.message}</p>}
                         </div>
 
                         {/* Category */}
-                        <div className="space-y-1.5">
-                            <label className="text-sm font-bold text-gray-700 flex items-center gap-2">
-                                <Tag className="w-4 h-4 text-orange-500" />
-                                Category
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2 px-1">
+                                <Tag className="w-3 h-3 text-amber-500" />
+                                Classification
                             </label>
-                            <select
-                                {...register("categoryId")}
-                                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all outline-none text-sm appearance-none"
-                            >
-                                <option value="">Select Category</option>
-                                {categories.map((cat) => (
-                                    <option key={cat._id} value={cat._id}>{cat.name}</option>
-                                ))}
-                            </select>
-                            {errors.categoryId && <p className="text-xs text-red-500 font-medium">{errors.categoryId.message}</p>}
+                            <div className="relative">
+                                <select
+                                    {...register("categoryId")}
+                                    className="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all outline-none text-sm font-bold text-slate-700 appearance-none shadow-inner cursor-pointer"
+                                >
+                                    <option value="">Select Asset Class</option>
+                                    {categories.map((cat) => (
+                                        <option key={cat._id} value={cat._id}>{cat.name}</option>
+                                    ))}
+                                </select>
+                                <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-300">
+                                    <Plus className="w-4 h-4 rotate-45" />
+                                </div>
+                            </div>
+                            {errors.categoryId && <p className="text-[10px] text-red-500 font-black uppercase tracking-tighter px-1 mt-1">{errors.categoryId.message}</p>}
                         </div>
 
                         {/* Price & Stock Row */}
-                        <div className="grid grid-cols-2 gap-4">
-                            <div className="space-y-1.5">
-                                <label className="text-sm font-bold text-gray-700 flex items-center gap-2">
-                                    <DollarSign className="w-4 h-4 text-green-500" />
-                                    Price
+                        <div className="grid grid-cols-2 gap-6">
+                            <div className="space-y-2">
+                                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2 px-1">
+                                    <DollarSign className="w-3 h-3 text-emerald-500" />
+                                    Cost Matrix
                                 </label>
                                 <input
                                     type="number"
                                     step="0.01"
                                     {...register("price")}
-                                    className="w-full px-4 py-2.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all outline-none text-sm"
+                                    className="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all outline-none text-sm font-bold text-slate-700 shadow-inner"
                                     placeholder="0.00"
                                 />
-                                {errors.price && <p className="text-xs text-red-500 font-medium">{errors.price.message}</p>}
+                                {errors.price && <p className="text-[10px] text-red-500 font-black uppercase tracking-tighter px-1 mt-1">{errors.price.message}</p>}
                             </div>
-                            <div className="space-y-1.5">
-                                <label className="text-sm font-bold text-gray-700 flex items-center gap-2">
-                                    <Database className="w-4 h-4 text-purple-500" />
-                                    Stock
+                            <div className="space-y-2">
+                                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2 px-1">
+                                    <Database className="w-3 h-3 text-indigo-500" />
+                                    Volume
                                 </label>
                                 <input
                                     type="number"
-                                    {...register("stock")}
-                                    className="w-full px-4 py-2.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all outline-none text-sm"
+                                    {...register("stockQuantity")}
+                                    className="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all outline-none text-sm font-bold text-slate-700 shadow-inner"
                                     placeholder="0"
                                 />
-                                {errors.stock && <p className="text-xs text-red-500 font-medium">{errors.stock.message}</p>}
+                                {errors.stockQuantity && <p className="text-[10px] text-red-500 font-black uppercase tracking-tighter px-1 mt-1">{errors.stockQuantity.message}</p>}
                             </div>
                         </div>
 
                         {/* Threshold */}
-                        <div className="space-y-1.5">
-                            <label className="text-sm font-bold text-gray-700 flex items-center gap-2">
-                                <Activity className="w-4 h-4 text-red-500" />
-                                Minimum Threshold
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2 px-1">
+                                <Activity className="w-3 h-3 text-rose-500" />
+                                Critical Threshold
                             </label>
                             <input
                                 type="number"
-                                {...register("threshold")}
-                                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all outline-none text-sm font-medium"
-                                placeholder="Alert when stock is below..."
+                                {...register("minStockThreshold")}
+                                className="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all outline-none text-sm font-bold text-slate-700 shadow-inner"
+                                placeholder="5"
                             />
-                            {errors.threshold && <p className="text-xs text-red-500 font-medium">{errors.threshold.message}</p>}
-                            <p className="text-[10px] text-gray-400 italic mt-1">System will alert when stock reaches this level.</p>
+                            {errors.minStockThreshold && <p className="text-[10px] text-red-500 font-black uppercase tracking-tighter px-1 mt-1">{errors.minStockThreshold.message}</p>}
                         </div>
                     </div>
 
-                    <DialogFooter className="pt-4 border-t border-gray-50">
+                    <DialogFooter className="gap-3 sm:gap-0 pt-4 border-t border-slate-50">
                         <Button
                             type="button"
                             variant="ghost"
                             onClick={onClose}
-                            className="rounded-xl text-gray-500 hover:bg-gray-100"
+                            className="h-14 px-6 rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-slate-900 transition-all"
                         >
                             Cancel
                         </Button>
                         <Button
                             type="submit"
                             disabled={isLoading}
-                            className="bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-md min-w-[120px] shadow-blue-200 transition-all font-bold"
+                            className={`h-14 px-10 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] text-white shadow-xl transition-all ${
+                                isEditMode 
+                                ? 'bg-indigo-600 hover:bg-indigo-700 shadow-indigo-200' 
+                                : 'bg-slate-900 hover:bg-black shadow-slate-200'
+                            }`}
                         >
-                            {isLoading ? "Saving..." : "Create Product"}
+                            {isLoading ? "Synchronizing..." : isEditMode ? "Commit Changes" : "Register Asset"}
                         </Button>
                     </DialogFooter>
                 </form>
             </DialogContent>
         </Dialog>
-    );
-}
-
-function PlusIcon(props: any) {
-    return (
-        <svg
-            {...props}
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        >
-            <path d="M5 12h14" />
-            <path d="M12 5v14" />
-        </svg>
     );
 }

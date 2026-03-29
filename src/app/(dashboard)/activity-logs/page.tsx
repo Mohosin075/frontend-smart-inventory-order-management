@@ -36,7 +36,7 @@ const item = {
 
 export default function ActivityLogsPage() {
     const { data: activityData, isLoading } = useGetRecentActivitiesQuery(undefined);
-    const activities = activityData?.data || [];
+    const activities = activityData?.activities || [];
 
     const getActionIcon = (action: string) => {
         const lowerAction = action.toLowerCase();

@@ -56,7 +56,7 @@ export default function Dashboard() {
         );
     }
 
-    const insights = insightsData?.data || {
+    const insights = insightsData?.insights || {
         totalOrdersToday: 0,
         pendingOrders: 0,
         completedOrders: 0,
@@ -65,7 +65,7 @@ export default function Dashboard() {
         productSummary: [],
     };
 
-    const activities = activityData?.data || [];
+    const activities = activityData?.activities || [];
 
     const stats = [
         {
