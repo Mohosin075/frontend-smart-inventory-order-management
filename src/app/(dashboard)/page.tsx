@@ -239,7 +239,7 @@ export default function Dashboard() {
                             <div className="p-2.5 bg-amber-50 rounded-xl text-amber-600">
                                 <Activity className="w-5 h-5" />
                             </div>
-                            <h2 className="text-xl font-bold text-slate-900 tracking-tight">Event Stream</h2>
+                            <h2 className="text-xl font-bold text-slate-900 tracking-tight">Recent Activities</h2>
                         </div>
                     </div>
                     <div className="relative space-y-8 before:absolute before:left-3 before:top-2 before:bottom-2 before:w-[2px] before:bg-slate-100">
@@ -257,11 +257,11 @@ export default function Dashboard() {
                                         </p>
                                         <div className="flex items-center gap-3 mt-2">
                                             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                                                {new Date(activity.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                                {new Date(activity.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                             </span>
                                             <span className="w-1 h-1 rounded-full bg-slate-300" />
                                             <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest">
-                                                {activity.user || 'System'}
+                                                {activity.metadata?.user || 'System'}
                                             </span>
                                         </div>
                                     </div>

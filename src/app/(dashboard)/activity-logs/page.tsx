@@ -105,7 +105,7 @@ export default function ActivityLogsPage() {
                                                 </div>
                                                 <div className="flex items-center gap-2 mt-2">
                                                     <span className="text-[10px] font-black text-indigo-500 uppercase tracking-widest bg-indigo-50 px-2 py-0.5 rounded-lg flex items-center gap-1">
-                                                        <User className="w-3 h-3" /> {activity.user || "System Root"}
+                                                        <User className="w-3 h-3" /> {activity.metadata?.user || "System Root"}
                                                     </span>
                                                     <span className="w-1 h-1 rounded-full bg-slate-200" />
                                                     <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
@@ -114,7 +114,7 @@ export default function ActivityLogsPage() {
                                                 </div>
                                             </div>
                                             <div className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-50">
-                                                {new Date(activity.timestamp).toLocaleDateString('en-GB')} / {new Date(activity.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                                                {new Date(activity.createdAt).toLocaleDateString('en-GB')} / {new Date(activity.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-3 text-xs text-slate-500 font-bold">
