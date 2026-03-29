@@ -24,10 +24,18 @@ const data = [
 const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
         return (
-            <div className="bg-white p-4 border border-gray-100 shadow-lg rounded-lg">
-                <p className="font-bold text-gray-900 mb-2">{label}</p>
-                <p className="text-sm text-blue-600">Orders: {payload[0].value}</p>
-                <p className="text-sm text-green-600">Revenue: ${payload[1].value.toLocaleString()}</p>
+            <div className="bg-slate-900/90 backdrop-blur-md p-4 border border-white/10 shadow-2xl rounded-xl">
+                <p className="font-bold text-white mb-2">{label}</p>
+                <div className="space-y-1">
+                    <p className="text-sm text-indigo-400 flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-indigo-500" />
+                        Orders: {payload[0].value}
+                    </p>
+                    <p className="text-sm text-emerald-400 flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                        Revenue: ${payload[1].value.toLocaleString()}
+                    </p>
+                </div>
             </div>
         );
     }
@@ -41,45 +49,45 @@ export default function OrderRevenueChart() {
                 data={data}
                 margin={{
                     top: 10,
-                    right: 30,
-                    left: 0,
+                    right: 10,
+                    left: -20,
                     bottom: 0,
                 }}
             >
                 <defs>
                     <linearGradient id="colorOrders" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.1}/>
-                        <stop offset="95%" stopColor="#3B82F6" stopOpacity={0}/>
+                        <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3}/>
+                        <stop offset="95%" stopColor="#6366f1" stopOpacity={0}/>
                     </linearGradient>
                     <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#10B981" stopOpacity={0.1}/>
-                        <stop offset="95%" stopColor="#10B981" stopOpacity={0}/>
+                        <stop offset="5%" stopColor="#10b981" stopOpacity={0.3}/>
+                        <stop offset="95%" stopColor="#10b981" stopOpacity={0}/>
                     </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" opacity={0.5} />
                 <XAxis 
                     dataKey="name" 
                     axisLine={false} 
                     tickLine={false} 
-                    tick={{ fill: '#9CA3AF', fontSize: 12 }}
+                    tick={{ fill: '#64748b', fontSize: 12, fontWeight: 500 }}
                     dy={10}
                 />
                 <YAxis 
                     axisLine={false} 
                     tickLine={false} 
-                    tick={{ fill: '#9CA3AF', fontSize: 12 }}
+                    tick={{ fill: '#64748b', fontSize: 12, fontWeight: 500 }}
                 />
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip content={<CustomTooltip />} cursor={{ stroke: '#6366f1', strokeWidth: 1, strokeDasharray: '4 4' }} />
                 <Legend 
                     verticalAlign="top" 
                     align="right" 
                     iconType="circle"
                     content={({ payload }: any) => (
-                        <div className="flex justify-end gap-6 mb-4">
+                        <div className="flex justify-end gap-6 mb-8">
                             {payload.map((entry: any, index: number) => (
-                                <div key={`item-${index}`} className="flex items-center gap-2">
-                                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: entry.color }} />
-                                    <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                <div key={`item-${index}`} className="flex items-center gap-2 group cursor-pointer transition-opacity hover:opacity-80">
+                                    <div className="w-2.5 h-2.5 rounded-full shadow-sm" style={{ backgroundColor: entry.color }} />
+                                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em]">
                                         {entry.value}
                                     </span>
                                 </div>
@@ -90,20 +98,23 @@ export default function OrderRevenueChart() {
                 <Area
                     type="monotone"
                     dataKey="orders"
-                    stroke="#3B82F6"
-                    strokeWidth={3}
+                    stroke="#6366f1"
+                    strokeWidth={4}
                     fillOpacity={1}
                     fill="url(#colorOrders)"
+                    animationDuration={2000}
                 />
                 <Area
                     type="monotone"
                     dataKey="revenue"
-                    stroke="#10B981"
-                    strokeWidth={3}
+                    stroke="#10b981"
+                    strokeWidth={4}
                     fillOpacity={1}
                     fill="url(#colorRevenue)"
+                    animationDuration={2500}
                 />
             </AreaChart>
         </ResponsiveContainer>
     );
 }
+

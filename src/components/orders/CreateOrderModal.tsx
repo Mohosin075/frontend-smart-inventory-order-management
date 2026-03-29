@@ -14,8 +14,9 @@ import { Button } from "@/components/ui/button";
 import { useCreateOrderMutation } from "@/redux/features/order/orderApi";
 import { useGetProductsQuery } from "@/redux/features/product/productApi";
 import { toast } from "sonner";
-import { Plus, Trash2, User, ShoppingCart, Package, AlertTriangle, DollarSign } from "lucide-react";
+import { Plus, Trash2, User, ShoppingCart, Package, AlertTriangle, DollarSign, Sparkles } from "lucide-react";
 import { useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const orderSchema = z.object({
     customerName: z.string().min(2, "Customer name is required"),
@@ -62,7 +63,6 @@ export default function CreateOrderModal({ isOpen, onClose }: CreateOrderModalPr
         name: "products",
     }) as OrderFormData["products"] || [];
 
-    // Calculate total price during render to avoid cascading renders warning
     const totalPrice = useMemo(() => {
         let total = 0;
         watchedProducts.forEach((item) => {
@@ -75,173 +75,189 @@ export default function CreateOrderModal({ isOpen, onClose }: CreateOrderModalPr
     }, [watchedProducts, availableProducts]);
 
     const onSubmit = async (data: OrderFormData) => {
-        // Additional Conflict Handling
         const productIds = data.products.map(p => p.productId);
         const hasDuplicates = new Set(productIds).size !== productIds.length;
         if (hasDuplicates) {
-            toast.error("Duplicate product entries in the same order.");
+            toast.error("Duplicate product entries detected.");
             return;
         }
 
-        // Stock check
         for (const item of data.products) {
             const product = availableProducts.find((p: any) => p._id === item.productId);
             if (!product) continue;
-            if (item.quantity > product.stock) {
-                toast.error(`Only ${product.stock} items available in stock for "${product.name}".`);
+            if (item.quantity > product.stockQuantity) {
+                toast.error(`Only ${product.stockQuantity} items available for "${product.name}".`);
                 return;
             }
-            if (product.status === 'Out of Stock' || product.stock <= 0) {
-                toast.error(`Product "${product.name}" is currently unavailable.`);
+            if (product.status !== 'Active') {
+                toast.error(`"${product.name}" is currently unavailable.`);
                 return;
             }
         }
 
         try {
             await createOrder(data).unwrap();
-            toast.success("Order created successfully! Stock deducted.");
+            toast.success("Order processed successfully. Inventory updated.");
             reset();
             onClose();
         } catch (error: any) {
-            toast.error(error?.data?.message || "Failed to create order");
+            toast.error(error?.data?.message || "Failed to process order.");
         }
     };
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogContent className="sm:max-w-[640px] p-0 overflow-hidden rounded-2xl border-none shadow-2xl">
-                <div className="bg-emerald-600 p-6 text-white">
-                    <DialogHeader>
-                        <DialogTitle className="text-xl font-bold flex items-center gap-2">
-                            <ShoppingCart className="w-5 h-5" />
-                            New Sales Order
+            <DialogContent className="sm:max-w-[700px] p-0 overflow-hidden rounded-[2.5rem] border-none shadow-[0_32px_64px_-16px_rgba(0,0,0,0.2)] bg-white">
+                <div className="premium-sidebar p-8 text-white relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl -mr-10 -mt-10" />
+                    <DialogHeader className="relative z-10">
+                        <DialogTitle className="text-2xl font-black flex items-center gap-3 tracking-tight">
+                            <div className="p-2 bg-white/10 rounded-xl">
+                                <ShoppingCart className="w-6 h-6" />
+                            </div>
+                            New Sales Pipeline
                         </DialogTitle>
-                        <p className="text-emerald-100 text-sm mt-1">Register a new customer order and manage fulfillment.</p>
+                        <p className="text-indigo-200 text-[11px] font-bold uppercase tracking-[0.2em] mt-2 opacity-80">
+                            Fulfillment Management System
+                        </p>
                     </DialogHeader>
                 </div>
                 
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="p-8 space-y-6 bg-white max-h-[70vh] overflow-y-auto">
-                        <div className="space-y-4">
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
+                    <div className="p-10 space-y-10 max-h-[65vh] overflow-y-auto custom-scrollbar">
+                        <div className="space-y-8">
                             {/* Customer Info */}
-                            <div className="space-y-2">
-                                <label className="text-xs font-bold text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1.5">
+                            <div className="space-y-3">
+                                <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] ml-1 flex items-center gap-2">
                                     <User className="w-3.5 h-3.5" />
-                                    Customer Name
+                                    Account Identity
                                 </label>
                                 <input
                                     {...register("customerName")}
-                                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all outline-none text-sm font-medium"
-                                    placeholder="e.g. John Doe"
+                                    className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500/20 transition-all outline-none font-bold text-slate-900 placeholder:text-slate-300"
+                                    placeholder="e.g. Corporate Client Alpha"
                                 />
-                                {errors.customerName && <p className="text-xs text-red-500 font-medium">{errors.customerName.message}</p>}
+                                {errors.customerName && <p className="text-[10px] font-bold text-red-500 uppercase tracking-wide px-2">{errors.customerName.message}</p>}
                             </div>
 
-                            <div className="h-px bg-gray-50 my-2" />
+                            <div className="h-px bg-slate-100/60" />
 
                             {/* Product Field Array */}
-                            <div className="space-y-4">
-                                <div className="flex items-center justify-between mb-2">
-                                    <label className="text-xs font-bold text-gray-500 uppercase tracking-widest ml-1 flex items-center gap-1.5">
+                            <div className="space-y-6">
+                                <div className="flex items-center justify-between">
+                                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] ml-1 flex items-center gap-2">
                                         <Package className="w-3.5 h-3.5" />
-                                        Order Items
+                                        Inventory Selection
                                     </label>
                                     <Button 
                                         type="button" 
                                         variant="ghost" 
                                         size="sm" 
                                         onClick={() => append({ productId: "", quantity: 1 })}
-                                        className="text-emerald-600 font-bold text-xs uppercase hover:bg-emerald-50"
+                                        className="text-indigo-600 font-black text-[10px] uppercase tracking-widest hover:bg-indigo-50 px-4 rounded-xl transition-all"
                                     >
-                                        <Plus className="w-4 h-4 mr-1" /> Add Item
+                                        <Plus className="w-4 h-4 mr-1.5" /> Add Component
                                     </Button>
                                 </div>
 
-                                <div className="space-y-3">
-                                    {fields.map((field, index) => {
-                                        const selectedProductId = watchedProducts[index]?.productId || "";
-                                        const selectedProduct = availableProducts.find((p: any) => p._id === selectedProductId);
-                                        
-                                        return (
-                                            <div key={field.id} className="group flex flex-col sm:flex-row gap-3 p-4 rounded-xl border border-gray-100 bg-gray-50/20 hover:border-emerald-100 transition-all">
-                                                <div className="flex-grow space-y-1.5">
-                                                    <select
-                                                        {...register(`products.${index}.productId`)}
-                                                        className="w-full px-3 py-2 bg-white border border-gray-100 rounded-lg text-sm transition-all focus:ring-2 focus:ring-emerald-500 outline-none"
-                                                    >
-                                                        <option value="">Select Product...</option>
-                                                        {availableProducts.map((p: any) => (
-                                                            <option key={p._id} value={p._id} disabled={p.status === 'Out of Stock'}>
-                                                                {p.name} (${p.price}) - {p.stock} left
-                                                            </option>
-                                                        ))}
-                                                    </select>
-                                                    {errors.products?.[index]?.productId && (
-                                                        <p className="text-[10px] text-red-500 font-medium">{errors.products[index]?.productId?.message}</p>
-                                                    )}
-                                                    {selectedProduct && selectedProduct.stock <= 5 && (
-                                                        <div className="text-[10px] text-orange-600 font-bold uppercase flex items-center gap-1 scale-95 origin-left">
-                                                            <AlertTriangle className="w-3 h-3" /> 
-                                                            Limited Stock Available ({selectedProduct.stock})
-                                                        </div>
-                                                    )}
-                                                </div>
-
-                                                <div className="flex gap-2 items-center">
-                                                    <div className="w-24 relative">
-                                                        <input
-                                                            type="number"
-                                                            {...register(`products.${index}.quantity`)}
-                                                            className="w-full px-3 py-2 bg-white border border-gray-100 rounded-lg text-sm text-center outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
-                                                            placeholder="Qty"
-                                                        />
-                                                        {errors.products?.[index]?.quantity && (
-                                                            <p className="text-[10px] text-red-500 font-medium absolute -bottom-4 left-0 w-full text-center">{errors.products[index]?.quantity?.message}</p>
+                                <div className="space-y-4">
+                                    <AnimatePresence mode="popLayout">
+                                        {fields.map((field, index) => {
+                                            const selectedProductId = watchedProducts[index]?.productId || "";
+                                            const selectedProduct = availableProducts.find((p: any) => p._id === selectedProductId);
+                                            
+                                            return (
+                                                <motion.div 
+                                                    key={field.id}
+                                                    initial={{ opacity: 0, scale: 0.95 }}
+                                                    animate={{ opacity: 1, scale: 1 }}
+                                                    exit={{ opacity: 0, x: -20 }}
+                                                    className="group flex flex-col sm:flex-row gap-4 p-6 rounded-[2rem] bg-slate-50/50 border border-transparent hover:border-indigo-100 hover:bg-white hover:shadow-xl hover:shadow-indigo-500/5 transition-all duration-300"
+                                                >
+                                                    <div className="flex-grow space-y-2">
+                                                        <select
+                                                            {...register(`products.${index}.productId`)}
+                                                            className="w-full px-5 py-3.5 bg-white border-none rounded-2xl text-sm font-bold text-slate-700 transition-all focus:ring-2 focus:ring-indigo-500/20 outline-none shadow-sm"
+                                                        >
+                                                            <option value="">Select Asset...</option>
+                                                            {availableProducts.map((p: any) => (
+                                                                <option key={p._id} value={p._id} disabled={p.status === 'Out of Stock' || p.stockQuantity <= 0}>
+                                                                    {p.name} — ${p.price.toLocaleString()} [{p.stockQuantity} Unit]
+                                                                </option>
+                                                            ))}
+                                                        </select>
+                                                        {errors.products?.[index]?.productId && (
+                                                            <p className="text-[10px] text-red-500 font-bold uppercase py-1">{errors.products[index]?.productId?.message}</p>
+                                                        )}
+                                                        {selectedProduct && selectedProduct.stockQuantity <= (selectedProduct.minStockThreshold || 5) && (
+                                                            <div className="text-[9px] font-black text-amber-500 uppercase tracking-widest flex items-center gap-1.5 mt-2 px-1">
+                                                                <AlertTriangle className="w-3.5 h-3.5" /> 
+                                                                Inventory Critical ({selectedProduct.stockQuantity} left)
+                                                            </div>
                                                         )}
                                                     </div>
-                                                    <Button
-                                                        type="button"
-                                                        variant="ghost"
-                                                        size="sm"
-                                                        disabled={fields.length === 1}
-                                                        onClick={() => remove(index)}
-                                                        className="text-red-400 hover:text-red-600 hover:bg-red-50 p-2 rounded-lg"
-                                                    >
-                                                        <Trash2 className="w-4 h-4" />
-                                                    </Button>
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
+
+                                                    <div className="flex gap-3 items-center">
+                                                        <div className="w-28 relative">
+                                                            <input
+                                                                type="number"
+                                                                {...register(`products.${index}.quantity`)}
+                                                                className="w-full px-5 py-3.5 bg-white border-none rounded-2xl text-sm font-black text-center outline-none focus:ring-2 focus:ring-indigo-500/20 transition-all shadow-sm"
+                                                                placeholder="Qty"
+                                                            />
+                                                            {errors.products?.[index]?.quantity && (
+                                                                <p className="text-[9px] text-red-500 font-bold absolute -bottom-5 left-0 w-full text-center uppercase">{errors.products[index]?.quantity?.message}</p>
+                                                            )}
+                                                        </div>
+                                                        <Button
+                                                            type="button"
+                                                            variant="ghost"
+                                                            size="sm"
+                                                            disabled={fields.length === 1}
+                                                            onClick={() => remove(index)}
+                                                            className="h-12 w-12 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-2xl transition-colors"
+                                                        >
+                                                            <Trash2 className="w-5 h-5" />
+                                                        </Button>
+                                                    </div>
+                                                </motion.div>
+                                            );
+                                        })}
+                                    </AnimatePresence>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="p-8 border-t border-gray-50 bg-gray-50/10">
-                        <div className="flex justify-between items-center mb-6">
-                            <div className="text-xs font-bold text-gray-400 uppercase tracking-widest">Estimated Total</div>
-                            <div className="text-3xl font-bold text-gray-900 font-mono tracking-tighter flex items-center gap-1">
-                                <DollarSign className="w-6 h-6 text-emerald-600" />
+                    <div className="p-10 border-t border-slate-50 bg-slate-50/10">
+                        <div className="flex items-center justify-between mb-10 p-6 bg-white rounded-[2rem] premium-shadow border-none">
+                            <div className="space-y-1">
+                                <div className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">Gross Valuation</div>
+                                <div className="text-sm font-bold text-indigo-500 uppercase tracking-widest flex items-center gap-2">
+                                    <Sparkles className="w-4 h-4" /> Final Audit
+                                </div>
+                            </div>
+                            <div className="text-4xl font-black text-slate-900 tracking-tighter flex items-center">
+                                <DollarSign className="w-7 h-7 text-indigo-600 -mr-1" />
                                 {totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                             </div>
                         </div>
 
-                        <DialogFooter className="flex flex-col sm:flex-row gap-3">
+                        <DialogFooter className="flex flex-col sm:flex-row gap-4">
                             <Button
                                 type="button"
                                 variant="ghost"
                                 onClick={onClose}
-                                className="w-full sm:w-auto rounded-xl text-gray-500 font-medium"
+                                className="w-full sm:flex-1 h-14 rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-slate-600 transition-all"
                             >
-                                Cancel
+                                Void Order
                             </Button>
                             <Button
                                 type="submit"
                                 disabled={isLoading}
-                                className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-lg shadow-emerald-50 transition-all font-bold px-10 h-11"
+                                className="w-full sm:flex-[2] h-14 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl shadow-2xl shadow-indigo-600/30 transition-all font-black uppercase tracking-[0.2em] text-[11px]"
                             >
-                                {isLoading ? "Processing..." : "Finish & Create Order"}
+                                {isLoading ? "Synchronizing Data..." : "Execute Shipment"}
                             </Button>
                         </DialogFooter>
                     </div>
@@ -250,3 +266,4 @@ export default function CreateOrderModal({ isOpen, onClose }: CreateOrderModalPr
         </Dialog>
     );
 }
+

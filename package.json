@@ -1,5 +1,5 @@
 {
-  "name": "ascela-dashboard",
+  "name": "smart-inventory-dashboard",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -26,6 +26,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
+    "framer-motion": "^12.38.0",
     "lucide-react": "^0.555.0",
     "next": "^16.0.7",
     "react": "19.2.0",
