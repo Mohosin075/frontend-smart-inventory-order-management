@@ -14,6 +14,21 @@ export const productApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["Category"],
         }),
+        updateCategory: builder.mutation({
+            query: ({ id, ...data }) => ({
+                url: `/products/categories/${id}`,
+                method: "PATCH",
+                body: data,
+            }),
+            invalidatesTags: ["Category", "Product"],
+        }),
+        deleteCategory: builder.mutation({
+            query: (id) => ({
+                url: `/products/categories/${id}`,
+                method: "DELETE",
+            }),
+            invalidatesTags: ["Category", "Product"],
+        }),
         getProducts: builder.query({
             query: (params) => ({
                 url: "/products",
@@ -62,6 +77,8 @@ export const productApi = baseApi.injectEndpoints({
 export const {
     useGetCategoriesQuery,
     useCreateCategoryMutation,
+    useUpdateCategoryMutation,
+    useDeleteCategoryMutation,
     useGetProductsQuery,
     useCreateProductMutation,
     useGetProductByIdQuery,

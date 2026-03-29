@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { 
     useGetCategoriesQuery, 
-    useCreateCategoryMutation 
+    useDeleteCategoryMutation 
 } from "@/redux/features/product/productApi";
 import { Button } from "@/components/ui/button";
 import { 
@@ -11,14 +11,16 @@ import {
     Layers, 
     Edit, 
     Trash2, 
-    Search,
     ArrowUpRight,
     Activity,
-    FolderKanban
+    FolderKanban,
+    Loader2,
+    History
 } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import CategoryFormModal from "@/components/categories/CategoryFormModal";
 import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "sonner";
 
 const container = {
     hidden: { opacity: 0 },
@@ -31,15 +33,73 @@ const container = {
 };
 
 const item = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30 },
     show: { opacity: 1, y: 0 }
 };
 
 export default function CategoriesPage() {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [editingCategory, setEditingCategory] = useState<any>(null);
+    
     const { data: categoriesData, isLoading } = useGetCategoriesQuery(undefined);
+    const [deleteCategory, { isLoading: isDeleting }] = useDeleteCategoryMutation();
 
     const categories = categoriesData?.data || [];
+
+    const handleEdit = (category: any) => {
+        setEditingCategory(category);
+        setIsModalOpen(true);
+    };
+
+    const handleDelete = async (id: string, name: string) => {
+        toast.custom((t) => (
+            <div className="bg-white/95 backdrop-blur-xl border border-slate-100 p-8 rounded-[2rem] shadow-2xl flex flex-col gap-6 min-w-[340px]">
+                <div className="flex items-center gap-4">
+                    <div className="w-14 h-14 rounded-2xl bg-red-50 flex items-center justify-center text-red-500 shadow-inner">
+                        <Trash2 className="w-7 h-7" />
+                    </div>
+                    <div>
+                        <h4 className="font-black text-slate-900 uppercase tracking-tight text-lg">Destroy Node?</h4>
+                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] mt-1">{name}</p>
+                    </div>
+                </div>
+                <p className="text-xs text-slate-500 font-medium leading-relaxed">
+                    This will permanently remove the classification node. Linked assets will become unassigned.
+                </p>
+                <div className="flex gap-3">
+                    <button 
+                        onClick={() => toast.dismiss(t)}
+                        className="flex-1 h-12 rounded-xl text-[10px] font-black uppercase tracking-widest text-slate-400 hover:bg-slate-50 transition-all border border-transparent hover:border-slate-100"
+                    >
+                        Abort
+                    </button>
+                    <button 
+                        onClick={async () => {
+                            toast.dismiss(t);
+                            try {
+                                await deleteCategory(id).unwrap();
+                                toast.success("Classification removed", {
+                                    description: `${name} has been purged from the architecture.`
+                                });
+                            } catch (error: any) {
+                                toast.error("System Failure", {
+                                    description: error?.data?.message || "Failed to remove node"
+                                });
+                            }
+                        }}
+                        className="flex-1 h-12 rounded-xl bg-red-600 text-white text-[10px] font-black uppercase tracking-widest shadow-lg shadow-red-200 hover:bg-red-700 transition-all"
+                    >
+                        Confirm
+                    </button>
+                </div>
+            </div>
+        ), { duration: 5000 });
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setEditingCategory(null);
+    };
 
     return (
         <motion.div 
@@ -68,7 +128,7 @@ export default function CategoriesPage() {
 
             {/* Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <AnimatePresence>
+                <AnimatePresence mode="popLayout">
                     {isLoading ? (
                         [1, 2, 3, 4, 5, 6].map((i) => (
                             <Skeleton key={i} className="h-64 w-full rounded-[2.5rem]" />
@@ -79,63 +139,85 @@ export default function CategoriesPage() {
                                 key={category._id}
                                 variants={item}
                                 whileHover={{ y: -8 }}
-                                className="glass-card p-8 rounded-[2.5rem] border-none shadow-xl shadow-indigo-500/5 group transition-all duration-500 relative overflow-hidden"
+                                layout
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.95 }}
+                                className="glass-card p-8 rounded-[3rem] border-none shadow-xl shadow-indigo-500/5 group transition-all duration-500 relative overflow-hidden"
                             >
-                                <div className="absolute top-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-all transform translate-x-4 group-hover:translate-x-0">
-                                    <div className="flex gap-2">
-                                        <button className="p-2.5 bg-white shadow-lg rounded-xl text-slate-400 hover:text-indigo-600 transition-all">
+                                <div className="absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-100 transition-all transform translate-x-4 group-hover:translate-x-0 z-20">
+                                    <div className="flex gap-3">
+                                        <button 
+                                            onClick={() => handleEdit(category)}
+                                            className="p-3 bg-white shadow-xl rounded-xl text-slate-400 hover:text-indigo-600 hover:scale-110 transition-all"
+                                        >
                                             <Edit className="w-4 h-4" />
                                         </button>
-                                        <button className="p-2.5 bg-white shadow-lg rounded-xl text-slate-400 hover:text-red-600 transition-all">
-                                            <Trash2 className="w-4 h-4" />
+                                        <button 
+                                            onClick={() => handleDelete(category._id, category.name)}
+                                            disabled={isDeleting}
+                                            className="p-3 bg-white shadow-xl rounded-xl text-slate-400 hover:text-red-600 hover:scale-110 transition-all"
+                                        >
+                                            {isDeleting ? <Loader2 className="w-4 h-4 animate-spin text-red-600" /> : <Trash2 className="w-4 h-4" />}
                                         </button>
                                     </div>
                                 </div>
 
-                                <div className="flex items-center gap-6 mb-8">
-                                    <div className="p-4 bg-indigo-50 rounded-[1.5rem] text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-500 shadow-sm">
-                                        <FolderKanban className="w-8 h-8" />
+                                <div className="flex items-center gap-6 mb-10 relative z-10">
+                                    <div className="p-5 bg-indigo-50 rounded-[2rem] text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-500 shadow-sm ring-1 ring-indigo-500/5 group-hover:rotate-6">
+                                        <FolderKanban className="w-10 h-10" />
                                     </div>
                                     <div>
-                                        <h3 className="font-black text-slate-900 text-xl tracking-tight group-hover:text-indigo-600 transition-colors">{category.name}</h3>
-                                        <div className="flex items-center gap-2 mt-1.5 opacity-60">
-                                            <Activity className="w-3 h-3 text-emerald-500" />
+                                        <h3 className="font-black text-slate-900 text-2xl tracking-tight group-hover:text-indigo-600 transition-colors uppercase">{category.name}</h3>
+                                        <div className="flex items-center gap-2 mt-2 opacity-60">
+                                            <Activity className="w-3.5 h-3.5 text-emerald-500" />
                                             <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Master Node</span>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="space-y-6">
-                                    <div className="bg-slate-50/50 p-5 rounded-[1.5rem] flex items-center justify-between">
+                                <div className="space-y-8 relative z-10">
+                                    <div className="bg-slate-50/50 p-6 rounded-[2rem] flex items-center justify-between group-hover:bg-white group-hover:shadow-lg transition-all shadow-inner">
                                         <div className="space-y-1">
-                                            <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Mapped Assets</div>
-                                            <div className="text-2xl font-black text-slate-900 tracking-tighter">
-                                                {category.productCount || 0} <span className="text-[10px] text-slate-300 font-bold uppercase">Linked</span>
+                                            <div className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em]">Mapped Assets</div>
+                                            <div className="text-3xl font-black text-slate-900 tracking-tighter group-hover:text-indigo-600 transition-colors">
+                                                {category.productCount || 0} <span className="text-[10px] text-slate-300 font-bold uppercase tracking-widest ml-1">Linked</span>
                                             </div>
                                         </div>
-                                        <Button variant="ghost" size="sm" className="h-10 w-10 rounded-xl bg-white shadow-sm border-none p-0 text-indigo-600 hover:bg-indigo-50">
-                                            <ArrowUpRight className="w-5 h-5" />
+                                        <Button variant="ghost" size="sm" className="h-12 w-12 rounded-2xl bg-white shadow-md border-none p-0 text-indigo-600 hover:bg-indigo-600 hover:text-white transition-all">
+                                            <ArrowUpRight className="w-6 h-6" />
                                         </Button>
                                     </div>
 
-                                    <div className="flex justify-between items-center text-[10px] font-black text-slate-300 uppercase tracking-[0.2em] px-2">
-                                        <span>EST. {new Date(category.createdAt).getFullYear()}</span>
-                                        <span className="text-indigo-400 font-black group-hover:underline cursor-pointer">Protocol: SHA-256</span>
+                                    <div className="flex justify-between items-center text-[10px] font-black text-slate-300 uppercase tracking-[0.3em] px-4">
+                                        <div className="flex items-center gap-2">
+                                            <History className="w-3 h-3" />
+                                            <span>EST. {new Date(category.createdAt).getFullYear()}</span>
+                                        </div>
+                                        <span className="text-indigo-400 font-black group-hover:scale-110 transition-transform">SHA-256</span>
                                     </div>
                                 </div>
+                                <div className="absolute -bottom-12 -right-12 w-32 h-32 bg-indigo-500/5 rounded-full blur-3xl group-hover:bg-indigo-500/10 transition-all duration-700" />
                             </motion.div>
                         ))
                     ) : (
                         <motion.div 
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            className="col-span-full py-32 text-center"
+                            className="col-span-full py-40 text-center"
                         >
-                            <div className="w-24 h-24 bg-slate-50 rounded-[2.5rem] flex items-center justify-center mx-auto mb-8 text-slate-200 shadow-inner">
-                                <Layers className="w-12 h-12" />
+                            <div className="w-32 h-32 bg-slate-50 rounded-[3rem] flex items-center justify-center mx-auto mb-10 text-slate-200 shadow-inner group transition-all duration-700 hover:bg-indigo-50 hover:text-indigo-200">
+                                <Layers className="w-16 h-16 transform group-hover:rotate-12 transition-transform duration-700" />
                             </div>
-                            <h3 className="text-slate-900 font-black text-2xl tracking-tight italic">Void Architecture</h3>
-                            <p className="text-slate-400 text-xs mt-3 uppercase font-bold tracking-[0.3em]">No logical domains established in the current cluster.</p>
+                            <h3 className="text-slate-900 font-black text-3xl tracking-tight italic opacity-30">Void Architecture</h3>
+                            <p className="text-slate-400 text-xs mt-4 uppercase font-bold tracking-[0.4em] max-w-[400px] mx-auto leading-relaxed">No logical domains established in the current cluster protocol repository.</p>
+                            <Button 
+                                onClick={() => setIsModalOpen(true)}
+                                variant="outline"
+                                className="mt-10 h-12 rounded-xl px-8 border-slate-100 uppercase tracking-widest font-black text-[10px] text-slate-400 hover:text-indigo-600 hover:bg-indigo-50"
+                            >
+                                Overwrite Empty Protocol
+                            </Button>
                         </motion.div>
                     )}
                 </AnimatePresence>
@@ -143,9 +225,9 @@ export default function CategoriesPage() {
 
             <CategoryFormModal 
                 isOpen={isModalOpen} 
-                onClose={() => setIsModalOpen(false)} 
+                onClose={closeModal} 
+                initialData={editingCategory}
             />
         </motion.div>
     );
 }
-
