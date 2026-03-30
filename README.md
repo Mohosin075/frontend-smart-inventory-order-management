@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Smart Inventory & Order Management System (Frontend)
 
-## Getting Started
+A modern, high-performance Inventory and Order Management Dashboard built with Next.js (App Router). This project is designed to help businesses track inventory, manage orders, and visualize performance analytics through an intuitive user interface.
 
-First, run the development server:
+# Live URL : https://195.35.6.13:3003
 
+## 🚀 Key Features
+
+- **Comprehensive Authentication:** Secure login, signup, password reset, and OTP verification flows.
+- **Admin Dashboard Overview:** Real-time visualization of sales revenue, user engagement, and event trends using interactive charts (Recharts).
+- **Inventory Management:** Full CRUD operations for products and categories with modal-based forms.
+- **Order Management:** Streamlined order creation and tracking system.
+- **Restock Queue:** Dedicated monitoring for low-stock items to ensure timely replenishment.
+- **User Management:** Administrative tools to manage system users, roles, and permissions.
+- **Activity Logs:** Detailed tracking of system actions for auditing and security.
+- **Real-time Notifications:** Instant alerts for critical system events and updates.
+- **Communication Suite:** Integrated internal chat and video/audio messaging capabilities (powered by Agora).
+- **Responsive Design:** Fully optimized for mobile, tablet, and desktop viewing experiences.
+
+## 🛠 Tech Stack
+
+- **Framework:** [Next.js 15+](https://nextjs.org/) (App Router)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **State Management:** [Redux Toolkit](https://redux-toolkit.js.org/) & [RTK Query](https://redux-toolkit.js.org/rtk-query/overview)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/) & [Radix UI](https://www.radix-ui.com/)
+- **Forms & Validation:** [React Hook Form](https://react-hook-form.com/) & [Zod](https://zod.dev/)
+- **Animations:** [Framer Motion](https://www.framer.com/motion/)
+- **Data Visualization:** [Recharts](https://recharts.org/)
+- **Real-time Engine:** [Socket.io](https://socket.io/) & [Agora RTC](https://www.agora.io/)
+
+## 🏁 Getting Started
+
+Follow these steps to set up the project on your local machine:
+
+### 1. Clone the Repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repository-url>
+cd frontend-smart-inventory-order-management
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install Dependencies
+```bash
+npm install
+# or
+yarn install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Environment Configuration
+Create a `.env.local` file in the root directory and add the following variables:
+```env
+NEXT_PUBLIC_BASEURL=http://localhost:5000
+# Add other necessary API keys (Agora, etc.) here
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Launch Development Server
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
-## Learn More
+## 📁 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+- `src/app`: Application router, pages, and layouts.
+- `src/components`: Reusable UI components and feature-specific modules.
+- `src/redux`: Redux store configuration, slices, and RTK Query API definitions.
+- `src/lib`: Shared utility functions and configuration files.
+- `src/hooks`: Custom React hooks for shared logic.
+- `src/Provider`: Global context providers including Auth Guards and Redux.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📄 License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the [MIT License](LICENSE).
