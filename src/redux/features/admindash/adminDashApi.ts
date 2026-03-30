@@ -8,7 +8,7 @@ export const adminDashApi = baseApi.injectEndpoints({
                 url: "/stats/admin/events-this-week",
                 method: "GET",
             }),
-            providesTags: ["AdminStats"],
+            providesTags: ["Dashboard"],
         }),
 
         getUserEngagementStats: builder.query({
@@ -16,7 +16,7 @@ export const adminDashApi = baseApi.injectEndpoints({
                 url: "/stats/admin/user-engagement",
                 method: "GET",
             }),
-            providesTags: ["AdminStats"],
+            providesTags: ["Dashboard"],
         }),
     }),
 });

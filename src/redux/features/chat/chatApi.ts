@@ -57,7 +57,7 @@ export const chatApi = baseApi.injectEndpoints({
                 url: "/chat",
                 method: "GET",
             }),
-            providesTags: ["Chat"],
+            providesTags: ["Dashboard"],
         }),
 
         // POST: Create chat with specific user
@@ -66,7 +66,7 @@ export const chatApi = baseApi.injectEndpoints({
                 url: `/chat/${otherUserId}`,
                 method: "POST",
             }),
-            invalidatesTags: ["Chat"],
+            invalidatesTags: ["Dashboard"],
         }),
     }),
 });

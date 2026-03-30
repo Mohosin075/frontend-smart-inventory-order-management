@@ -49,7 +49,7 @@ export default function ProductFormModal({ isOpen, onClose, categories, initialD
         formState: { errors },
         reset
     } = useForm<ProductFormData>({
-        resolver: zodResolver(productSchema),
+        resolver: zodResolver(productSchema) as any,
         defaultValues: {
             stockQuantity: 0,
             minStockThreshold: 5
